@@ -1,165 +1,275 @@
-# 🇺🇦 ウクライナ戦争レポート 2026
+# 中国・台湾有事レポート 2026
 
-4年間の戦況と今後の展望を包括的に解説するWebレポートプロジェクト
+**プロジェクト完全ドキュメント**
 
-## 📋 プロジェクト概要
+**GitHub Pages × Note 自動掲載システム 構築記録**
 
-2022年2月24日に始まったロシアのウクライナ侵攻について、2026年4月時点での戦況を多角的に分析・解説するデジタルコンテンツです。
-
-### 主な機能
-
-- ✅ **GitHub Pages自動公開** - index.htmlを編集してプッシュするだけで自動デプロイ
-- ✅ **アーカイブ機能** - 日付別に過去のレポートを自動保存
-- ✅ **Note下書き生成** - Noteに投稿するためのテキストファイルを自動生成
-- ✅ **インタラクティブな可視化** - タイムライン、戦況マップ、経済グラフ
-
-## 🌐 公開URL
-
-- **メインレポート**: `https://[あなたのGitHubユーザー名].github.io/ukraine-war-report/`
-- **アーカイブ**: `https://[あなたのGitHubユーザー名].github.io/ukraine-war-report/archive/`
-
-## 📂 ファイル構成
-
-```
-ukraine-war-report/
-├── index.html                  # メインレポート
-├── README.md                   # このファイル
-├── archive/                    # 日付別アーカイブ（自動生成）
-│   ├── index.html              # アーカイブ一覧ページ
-│   ├── 2026-04-22.html         # 4月22日版
-│   └── 2026-04-23.html         # 4月23日版
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # GitHub Actions設定
-└── scripts/
-    ├── package.json
-    ├── post-to-note.js         # Note下書き生成
-    └── build-archive.js        # アーカイブ一覧生成
-```
-
-## 🚀 セットアップ手順
-
-### 1. GitHubリポジトリを作成
-
-1. GitHub Desktopを開く
-2. `File` → `New repository`
-3. 名前: `ukraine-war-report` (任意)
-4. **Public（公開）に設定** ← GitHub Pages無料利用に必須
-5. `Create repository` をクリック
-
-### 2. ファイルを配置
-
-1. GitHub Desktop → `Repository` → `Show in Explorer`
-2. このプロジェクトのファイルをすべてコピー
-3. `.github` と `scripts` フォルダは手動で作成
-
-### 3. コミット＆プッシュ
-
-1. GitHub Desktopで変更を確認
-2. Summaryに「初回：ウクライナ戦争レポート2026」と入力
-3. `Commit to main` をクリック
-4. `Publish repository` または `Push origin` をクリック
-
-### 4. GitHub Pagesを有効化
-
-1. GitHubリポジトリページにアクセス
-2. `Settings` → `Pages`
-3. Source を **GitHub Actions** に変更
-4. デプロイが完了するまで2〜3分待つ
-
-### 5. GitHub Secretsを設定（Note投稿用・オプション）
-
-Note記事への半自動投稿を使う場合のみ：
-
-1. リポジトリ → `Settings` → `Secrets and variables` → `Actions`
-2. `New repository secret` で以下を登録：
-
-| Secret名 | 値 |
-|---------|-----|
-| `PAGES_URL` | `https://[ユーザー名].github.io/ukraine-war-report` |
-
-**Note APIは非公開のため、完全自動投稿は不可。下書きテキスト生成のみ対応。**
-
-## 📝 日常的な使い方
-
-### レポートを更新する
-
-1. `index.html` をメモ帳・VSCodeなどで編集
-2. GitHub Desktop でコミット＆プッシュ
-3. 2〜3分待つとGitHub Pagesが自動更新
-4. アーカイブに日付別で自動保存される
-
-### Noteに投稿する（半自動）
-
-1. GitHub Actionsが完了したら、`Actions` タブを開く
-2. 最新のワークフローをクリック
-3. `Artifacts` → `NOTE-DRAFT` をダウンロード
-4. `note-draft.txt` を開いてコピー
-5. Noteの編集画面に貼り付けて公開
-
-### 過去のレポートを見る
-
-- `https://[ユーザー名].github.io/ukraine-war-report/archive/` にアクセス
-- 日付をクリックするとその日のレポートが開く
-
-## 🛠️ トラブルシューティング
-
-### GitHub Pagesが404エラー
-
-- `index.html` がリポジトリルートに配置されているか確認
-- Settings → Pages で Source が **GitHub Actions** になっているか確認
-- 初回デプロイは5〜10分かかる場合があります
-
-### GitHub Actionsが失敗する
-
-- `deploy.yml` の YAML構文が正しいか確認
-- `scripts/package.json` が存在するか確認
-- GitHub Actionsのログで詳細なエラーを確認
-
-### アーカイブが生成されない
-
-- `archive` フォルダが存在するか確認（自動作成されます）
-- GitHub Actionsが正常に完了しているか確認
-
-## 📚 コンテンツ情報源
-
-本レポートは以下の信頼できる情報源を基に作成されています：
-
-- **ISW** (Institute for the Study of War) - 毎日の戦況分析
-- **日本国際問題研究所（JIIA）** - 戦略アウトルック2026
-- **防衛省防衛研究所（NIDS）** - NIDSコメンタリー
-- **IISS** (国際戦略研究所) - Military Balance
-- **Ukrinform** - ウクライナ国営通信社
-- **Bloomberg**, **日本経済新聞** - 経済分析
-
-## 📊 技術スタック
-
-| 技術 | 用途 |
-|-----|------|
-| HTML/CSS/JavaScript | フロントエンド |
-| Chart.js | グラフ描画 |
-| GitHub Pages | 無料Webホスティング |
-| GitHub Actions | 自動デプロイ・アーカイブ |
-| Node.js | スクリプト実行 |
-| Cheerio | HTML解析 |
-| Turndown | HTML→Markdown変換 |
-
-## 🔄 今後の拡張予定
-
-- [ ] ISWの最新レポート自動取得・反映
-- [ ] 経済指標（原油価格・為替）のAPI自動取得
-- [ ] Google Analytics追加
-- [ ] OGP画像自動生成
-- [ ] 複数記事シリーズ対応
-
-## 📄 ライセンス
-
-MIT License
-
-## 👤 作成者
-
-としひで
+作成日:2026年4月22日  
+作成者:としひで
 
 ---
 
-最終更新：2026年4月22日
+## 目次
+
+- 第1章 プロジェクト概要
+- 第2章 制作したコンテンツ
+- 第3章 システム構成とファイル一覧
+- 第4章 構築手順(ステップバイステップ)
+- 第5章 日常的な更新・運用方法
+- 第6章 トラブルシューティング記録
+- 第7章 今後の拡張アイデア
+
+---
+
+## 第1章 プロジェクト概要
+
+### 1-1 プロジェクトの目的
+
+2026年の東アジア最大の安全保障課題である「中国・台湾有事」を、一般視聴者向けにわかりやすく解説するYouTube動画と連動したデジタルコンテンツを制作・運用するシステムを構築した。
+
+単なる動画制作にとどまらず、以下の3つを一体化した情報発信プラットフォームとして設計した。
+
+- **YouTube動画**: 25〜30分の解説動画(台本あり)
+- **インタラクティブWebレポート**: GitHub Pagesで常時公開
+- **Note記事**: 半自動で下書き生成→貼り付けて公開
+
+### 1-2 完成したシステムの全体像
+
+| フロー | 内容 | 自動/手動 |
+|:------|:-----|:---------|
+| ① コンテンツ更新 | index.htmlを編集・保存 | 手動 |
+| ② GitHub Desktop | コミット＆プッシュ | 手動(30秒) |
+| ③ GitHub Actions | 自動デプロイ開始 | 全自動 |
+| ④ GitHub Pages | Webレポートが自動更新 | 全自動 |
+| ⑤ アーカイブ生成 | 日付別HTMLを自動保存 | 全自動 |
+| ⑥ Note下書き生成 | note-draft.txtを自動生成 | 全自動 |
+| ⑦ Note投稿 | テキストをコピペして公開 | 手動(2分) |
+
+### 1-3 使用した技術・サービス
+
+| サービス/技術 | 用途 | 費用 |
+|:------------|:-----|:-----|
+| Claude(Anthropic) | 台本・HTML・スクリプト生成 | 有料プラン |
+| GitHub Desktop | ファイルのバージョン管理・アップロード | 無料 |
+| GitHub Pages | HTMLレポートの無料Webホスティング | 無料 |
+| GitHub Actions | デプロイ・アーカイブ生成の自動化 | 無料 |
+| Note | 記事の公開・読者への情報発信 | 無料 |
+| Node.js | スクリプト実行環境 | 無料 |
+
+---
+
+## 第2章 制作したコンテンツ
+
+### 2-1 コンテンツの内容
+
+今回制作したレポートは、2026年の中国・台湾情勢を以下の4つの視点から多角的に分析している。
+
+- **戦況シミュレーション**: CSISの2026年台湾有事ウォーゲーム分析(24シナリオ)
+- **タイムライン**: 2023年〜2026年の主要出来事と軍事演習
+- **兵器解説**: 中国側(DF-21D・DF-26・055型駆逐艦・J-20)、台湾・米軍側(F-16V・HIMARS・ハープーン・PAC-3)
+- **経済影響分析**: 半導体サプライチェーン・TSMC・日本経済への影響
+
+### 2-2 情報源(シンクタンク・メディア)
+
+| 機関名 | 分析内容 |
+|:------|:--------|
+| CSIS(米戦略国際問題研究所) | 台湾有事ウォーゲーム「The First Battle of the Next War」 |
+| 防衛省防衛研究所(NIDS) | 中国のASBM開発動向・台湾海峡情勢分析 |
+| 日本国際問題研究所(JIIA) | 東アジア安全保障・日米台関係分析 |
+| 地経学研究所 | 台湾有事の経済的影響・サプライチェーン分析 |
+| JETRO | 半導体産業・台湾企業の海外展開動向 |
+| 日本台湾交流協会 | 台湾半導体産業調査報告書 |
+| 日本経済新聞・Bloomberg・CNN | 各種最新報道 |
+
+### 2-3 動画構成(台本)
+
+| セクション | 内容 | 目安時間 |
+|:---------|:-----|:---------|
+| オープニング | タイトルカード・概要説明 | 1〜2分 |
+| 第1部:背景編 | なぜ今、台湾なのか?2026年の緊張 | 5〜7分 |
+| 第2部:シミュレーション編 | CSISウォーゲーム24シナリオの全貌 | 7〜8分 |
+| 第3部:兵器編 | 中国vs台湾・米軍の最新鋭兵器 | 7〜8分 |
+| 第4部:経済編 | 半導体ショック・日本への影響 | 5〜7分 |
+| クロージング | まとめ・今後の展望 | 1〜2分 |
+| **合計** | | **約26〜32分** |
+
+---
+
+## 第3章 システム構成とファイル一覧
+
+### 3-1 リポジトリのファイル構成
+
+```
+リポジトリ名(例): taiwan-contingency-report
+
+├── index.html                  ← 統合レポート本体(台本+全ビジュアル)
+├── README.md                   ← セットアップガイド
+├── archive/                    ← 日付別アーカイブフォルダ(自動生成)
+│   ├── index.html              ← アーカイブ一覧ページ(自動生成)
+│   ├── 2026-04-22.html         ← 4月22日版(自動生成)
+│   └── 2026-04-23.html         ← 4月23日版(自動生成)
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          ← GitHub Actions設定
+└── scripts/
+    ├── post-to-note.js         ← Note下書き生成スクリプト
+    ├── build-archive.js        ← アーカイブ一覧生成スクリプト
+    └── package.json
+```
+
+### 3-2 各ファイルの役割
+
+| ファイル | 役割 | 編集頻度 |
+|:--------|:-----|:---------|
+| index.html | レポート本体。台本・タイムライン・シミュレーション・兵器解説・経済グラフを統合 | 毎回更新 |
+| deploy.yml | GitHub Actionsの自動化設定。デプロイ・アーカイブ・Note下書き生成を制御 | 基本触らない |
+| post-to-note.js | Noteへの下書きテキストを自動生成する | 基本触らない |
+| build-archive.js | アーカイブ一覧ページ(archive/index.html)を自動生成する | 基本触らない |
+| archive/*.html | 過去のレポートを日付別に自動保存したもの | 自動生成 |
+
+### 3-3 GitHub Secrets(設定済み)
+
+| Secret名 | 内容 |
+|:--------|:-----|
+| NOTE_SESSION_TOKEN | NoteのCookieから取得したセッショントークン(_note_session_v5) |
+| NOTE_USER_ID | NoteのユーザーID |
+| PAGES_URL | GitHub PagesのURL(例:https://username.github.io/taiwan-contingency-report) |
+
+💡 **NOTE_SESSION_TOKENは定期的に失効します。ログインできなくなったら再取得してSecretを更新してください。**
+
+---
+
+## 第4章 構築手順(ステップバイステップ)
+
+本プロジェクトを一から再現する場合の手順を記録する。
+
+### STEP 1: GitHubアカウントにサインイン
+
+GitHub Desktopを開き「Sign in to GitHub.com」をクリック。ブラウザでGitHubにログインして「Authorize desktop」をクリック。
+
+### STEP 2: 新しいリポジトリを作成
+
+- GitHub Desktop → File → New repository
+- Name: 任意(例:taiwan-contingency-report)
+- **Public(公開)に設定** ← GitHub Pages無料利用に必須
+- 「Create repository」をクリック
+
+### STEP 3: ファイルをリポジトリフォルダに配置
+
+- GitHub Desktop → Repository → Show in Explorer でフォルダを開く
+- index.html・README.md・.github/workflows/deploy.yml・scripts/ を配置
+- .github と scripts フォルダは手動で作成する必要がある
+
+### STEP 4: コミット＆プッシュ
+
+- GitHub Desktopの左下「Summary」に「初回:中国台湾有事レポート2026」と入力
+- 「Commit to main」をクリック
+- 「Publish repository」または「Push origin」をクリック
+
+### STEP 5: GitHub Pagesを有効化
+
+- GitHubリポジトリ → Settings → Pages
+- Source を「GitHub Actions」に変更
+- 「Static HTML」の「Configure」をクリック
+- 「Commit changes」をクリック
+
+### STEP 6: GitHub Secretsを設定
+
+- リポジトリ → Settings → Secrets and variables → Actions
+- 「New repository secret」で以下の3つを登録
+  - NOTE_SESSION_TOKEN: NoteのCookieから取得(_note_session_v5の値)
+  - NOTE_USER_ID: NoteのユーザーID
+  - PAGES_URL: GitHub PagesのURL
+
+💡 **NOTE_SESSION_TOKENの取得方法**: Chrome → note.comにログイン → F12 → Application → Cookies → https://note.com → _note_session_v5のValueをコピー
+
+### STEP 7: 動作確認
+
+- index.htmlを少し編集して保存
+- GitHub Desktop でコミット＆プッシュ
+- GitHub ActionsタブでDeployが緑になることを確認
+- GitHub PagesのURLでレポートが表示されることを確認
+- ActionsのArtifactsからnote-draft.zipをダウンロードして下書きを確認
+
+---
+
+## 第5章 日常的な更新・運用方法
+
+### 5-1 レポートを更新してNoteに投稿する手順
+
+| 手順 | 操作 | 所要時間 |
+|:----|:-----|:---------|
+| ① | index.htmlをメモ帳・VSCodeなどで編集・保存 | 10〜30分 |
+| ② | GitHub Desktop → Summaryに更新内容を入力 | 30秒 |
+| ③ | 「Commit to main」をクリック | 10秒 |
+| ④ | 「Push origin」をクリック | 10秒 |
+| ⑤ | GitHub Actions → 2〜3分待って緑になるのを確認 | 3分 |
+| ⑥ | ArtifactsからNOTE-DRAFTをダウンロード・解凍 | 1分 |
+| ⑦ | note-draft.txtをメモ帳で開いてコピー | 30秒 |
+| ⑧ | Noteの編集画面に貼り付けて公開 | 1〜2分 |
+
+### 5-2 過去のレポートを見る方法
+
+- GitHub Pages URL/archive/ にアクセス → 日付一覧が表示される
+- 例:https://username.github.io/taiwan-contingency-report/archive/
+- 各日付をクリックするとその日のレポートが開く
+- gitのコミット履歴からも過去の状態を確認できる
+
+### 5-3 NOTE_SESSION_TOKENが失効した場合
+
+- Chromeでnote.comにログイン
+- F12 → Application → Cookies → https://note.com
+- _note_session_v5のValueをコピー
+- GitHub → Settings → Secrets → NOTE_SESSION_TOKEN を更新
+
+---
+
+## 第6章 トラブルシューティング記録
+
+構築時に発生する可能性のある問題と解決策を記録する。
+
+| エラー | 原因 | 解決策 |
+|:------|:-----|:-------|
+| Repository creation failed(name already exists) | 同名リポジトリが既に存在 | リポジトリ名を変更(例:taiwan-contingency-report-2026) |
+| 404 File not found(GitHub Pages) | index.htmlがリポジトリに未配置 | ファイルを配置してプッシュ |
+| Note API 404 Not Found | APIエンドポイントが/v2→/v1に変更 | noteApiBaseを/api/v1に修正 |
+| Note API not_login | CookieのKey名が間違い | note_gw_session→_note_session_v5に修正 |
+| Note API 422 Unprocessable Entity | NoteのAPIが非公開のため形式不明 | 半自動方式(note-draft.txt生成)に切り替え |
+| Invalid workflow file(YAML構文エラー) | deploy.ymlの記述が正しくない | ファイルを丸ごと書き換え |
+| Cancelled(Actions) | 前のワークフローと重複 | しばらく待ってから手動でRun workflowを実行 |
+
+💡 **NoteへのAPI自動投稿はNoteが非公開APIのため完全自動化は困難。現在は半自動(note-draft.txt生成→コピペ)で運用。**
+
+---
+
+## 第7章 今後の拡張アイデア
+
+### 7-1 コンテンツの拡充
+
+- **ウクライナ戦争レポート**など他の紛争にも同じシステムを適用
+- **ISWの最新レポート**を毎日取得して自動でindex.htmlに反映する
+- **経済指標**(日経平均・半導体株価)をAPIで自動取得してグラフに反映
+- **YouTube動画のサムネイル画像**を自動生成
+- **台湾海峡の軍事演習データ**をリアルタイム更新
+
+### 7-2 システムの改善
+
+- NoteがAPIを公式公開した場合は完全自動投稿を実装
+- 複数の記事シリーズに対応(第1回・第2回…)
+- Googleアナリティクスを追加してPV数を把握
+- OGP画像(SNSシェア用サムネ)を自動生成
+- **インタラクティブ地図**で南西諸島・台湾海峡を可視化
+
+### 7-3 情報収集の自動化
+
+- **CSIS・IISS**の最新レポートをスクレイピングして要約
+- **半導体株価・TSMC株価**の最新データをAPIで取得
+- Google Alertsと連携して重要ニュースを自動収集
+- **防衛省・統合幕僚監部**の発表を自動追跡
+
+---
+
+**以上**
+
+**中国・台湾有事レポート2026 プロジェクト完全ドキュメント**  
+作成日:2026年4月22日
