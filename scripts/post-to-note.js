@@ -1,95 +1,45 @@
-const fs = require('fs');
-const path = require('path');
-const cheerio = require('cheerio');
-const TurndownService = require('turndown');
+import fs from 'fs';
 
-// Turndown設定
-const turndownService = new TurndownService({
-  headingStyle: 'atx',
-  codeBlockStyle: 'fenced'
+const pagesUrl = process.env.PAGES_URL || 'YOUR_PAGES_URL';
+const today = new Date().toLocaleDateString('ja-JP', {
+  year: 'numeric', month: 'long', day: 'numeric'
 });
 
-// HTMLから見出しとテキストコンテンツを抽出
-function extractContent(htmlPath) {
-  const html = fs.readFileSync(htmlPath, 'utf-8');
-  const $ = cheerio.load(html);
-  
-  // 不要な要素を削除
-  $('script').remove();
-  $('style').remove();
-  $('nav').remove();
-  $('footer').remove();
-  $('.chart-container').remove(); // チャートは除外
-  $('canvas').remove();
-  
-  // メインコンテンツを抽出
-  const title = $('h1').first().text();
-  const subtitle = $('.subtitle').first().text();
-  const updateDate = $('.update-date').first().text();
-  
-  let content = `# ${title}\n\n${subtitle}\n\n${updateDate}\n\n---\n\n`;
-  
-  // 各セクションを処理
-  $('section').each((i, section) => {
-    const $section = $(section);
-    const sectionId = $section.attr('id');
-    
-    // セクションタイトル
-    const h2 = $section.find('h2').first().text();
-    content += `## ${h2}\n\n`;
-    
-    // セクション内のコンテンツ
-    $section.find('p, ul, ol, .info-box, .warning-box, h3').each((j, elem) => {
-      const $elem = $(elem);
-      const tagName = elem.name;
-      
-      if (tagName === 'h3') {
-        content += `### ${$elem.text()}\n\n`;
-      } else if ($elem.hasClass('info-box') || $elem.hasClass('warning-box')) {
-        const boxTitle = $elem.find('h4').first().text();
-        const boxContent = $elem.clone().find('h4').remove().end().text().trim();
-        content += `**${boxTitle}**\n\n${boxContent}\n\n`;
-      } else if (tagName === 'p') {
-        const text = $elem.text().trim();
-        if (text) {
-          content += `${text}\n\n`;
-        }
-      } else if (tagName === 'ul' || tagName === 'ol') {
-        $elem.find('li').each((k, li) => {
-          const liText = $(li).text().trim();
-          if (liText) {
-            content += `- ${liText}\n`;
-          }
-        });
-        content += '\n';
-      }
-    });
-    
-    content += '\n---\n\n';
-  });
-  
-  // フッター情報
-  const pagesUrl = process.env.PAGES_URL || 'https://applejoker01-afk.github.io/ukraine-war-report';
-  content += `\n\n**完全版レポートはこちら：**\n${pagesUrl}\n\n`;
-  content += `**アーカイブ（過去のレポート）：**\n${pagesUrl}/archive/\n\n`;
-  
-  return content;
-}
+const draft = `
+タイトル：
+🇹🇼【台湾有事レポート】中国の包囲演習と「半導体の盾」が揺れる世界
 
-// メイン処理
-try {
-  const indexPath = path.join(__dirname, '..', 'index.html');
-  const outputPath = path.join(__dirname, 'note-draft.txt');
-  
-  console.log('Generating Note draft from index.html...');
-  const noteContent = extractContent(indexPath);
-  
-  // ファイルに保存
-  fs.writeFileSync(outputPath, noteContent, 'utf-8');
-  console.log(`✅ Note draft generated: ${outputPath}`);
-  console.log(`📝 Content length: ${noteContent.length} characters`);
-  
-} catch (error) {
-  console.error('❌ Error generating Note draft:', error);
-  process.exit(1);
-}
+本文：
+📌 更新日：${today}
+
+インタラクティブ解説ビジュアルはこちら👇
+${pagesUrl}
+
+（タイムライン・戦況マップ・軍事力比較・経済グラフをご覧いただけます）
+
+---
+
+## 今回のレポートの主要ポイント
+
+### 1️⃣ 中国の包囲演習「正義使命-2025」
+2025年12月、中国軍が台湾を取り囲む大規模実弾演習を実施。軍用機130機のうち90機が中間線を越えた。豪ABCは「中国はすでに戦争の準備が整っている」と報道。
+
+### 2️⃣ 「半導体の盾」——TSMCが世界の命運を握る
+世界の最先端半導体（7nm以下）の90%以上がTSMC1社に集中。台湾有事が起きれば、スマホ・自動車・家電・医療機器すべての生産が止まる。日本政府はTSMC熊本工場に計1.2兆円の補助金を拠出。
+
+### 3️⃣ トランプ政権下で揺らぐ「戦略的曖昧性」
+トランプ大統領は中国の演習に対し「まったく心配していない」と発言。米国の台湾防衛への意思が不透明になり、中国のリスク計算が変わる可能性が指摘されている。
+
+### 4️⃣ 日本への直接影響
+与那国島から台湾まで110km。シーレーン封鎖・半導体断絶・エネルギー停止が同時に起きるシナリオへの備えが急務。2026年度防衛予算にドローン関連費2773億円を計上。
+
+---
+
+詳細はこちら👉 ${pagesUrl}
+
+#台湾有事 #中国 #TSMC #半導体 #台湾海峡 #国際情勢 #地政学 #習近平 #日本経済 #安全保障
+`.trim();
+
+fs.writeFileSync('note-draft.txt', draft, 'utf8');
+console.log('✅ note-draft.txt を生成しました');
+console.log('GitHubのActionsタブからダウンロードしてNoteに貼り付けてください');
