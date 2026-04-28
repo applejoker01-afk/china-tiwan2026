@@ -58,30 +58,37 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # 変更をコミット前に最新を取得
-          git fetch origin main
+          echo "=== git status before add ==="
+          git status --short
 
-          # ローカルの変更を一時保存
+          echo "=== TIMELINE:INSERT marker check ==="
+          grep -c "TIMELINE:INSERT" index.html && echo "marker found" || echo "marker NOT found"
+
+          echo "=== Timeline section line count ==="
+          grep -c "tl-item" index.html && echo "tl-items found"
+
+          # node_modulesをgitの追跡から除外（すでに除外済みの場合はエラー無視）
+          git rm -r --cached scripts/node_modules/ 2>/dev/null || true
+          git rm --cached scripts/package-lock.json 2>/dev/null || true
+
+          # 対象ファイルのみ追加
           git add index.html archive/
-          git diff --staged --quiet && echo "No changes to commit" && exit 0
 
-          # コミット作成
+          echo "=== git status after add ==="
+          git status --short
+
+          echo "=== git diff staged summary ==="
+          git diff --staged --stat
+
+          # 変更がなければスキップ
+          if git diff --staged --quiet; then
+            echo "⚠ No changes to commit - index.html was not modified"
+            exit 0
+          fi
+
           git commit -m "Auto update $(date +'%Y-%m-%d')"
-
-          # リモートの変更をrebaseして取り込む
-          git rebase origin/main || (
-            git rebase --abort
-            echo "Rebase failed, trying merge..."
-            git reset HEAD~1
-            git stash
-            git pull --no-rebase origin main
-            git stash pop
-            git add index.html archive/
-            git diff --staged --quiet || git commit -m "Auto update $(date +'%Y-%m-%d') [merged]"
-          )
-
           git push origin main
-          echo "Push completed"
+          echo "✅ Push completed"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
