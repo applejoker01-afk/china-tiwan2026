@@ -1,13 +1,14 @@
 {
-  "name": "taiwan-report-scripts",
-  "version": "1.0.0",
+  "name": "report-scripts",
+  "version": "2.0.0",
   "type": "module",
-  "description": "台湾有事レポート 自動更新・Note投稿スクリプト",
   "scripts": {
+    "update": "node daily-update.js",
     "post": "node post-to-note.js",
     "archive": "node build-archive.js"
   },
   "dependencies": {
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "xml2js": "^0.6.2"
   }
 }
