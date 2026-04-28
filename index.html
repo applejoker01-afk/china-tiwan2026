@@ -119,6 +119,9 @@ section.active{display:block;}
 .tt-org{font-family:'Oswald';font-size:12px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;}
 .tt-quote{font-size:12px;line-height:1.8;color:#d8cccc;font-style:italic;margin-bottom:8px;}
 .tt-date{font-size:10px;color:var(--gray);}
+.tt-org a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);transition:border-color .2s;}
+.tt-org a:hover{border-bottom-color:var(--gold);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
 
 /* ── MAP ── */
 .map-wrap{background:rgba(58,26,26,0.2);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
@@ -189,6 +192,8 @@ section.active{display:block;}
 
 <div class="script-section">
 <div class="script-h1">第1部：背景編</div>
+<!-- TIMELINE:UPDATE:START -->
+<!-- TIMELINE:UPDATE:END -->
 
 <div class="script-h2">① 「一つの中国」——なぜ中国は台湾を狙うのか</div>
 <p class="script-p">中国共産党は「台湾は中国領土の一部」という「一つの中国」原則を国是としています。一方、台湾は1949年以来、独自の政府・軍隊・民主主義制度を持つ事実上の独立国家として機能しています。</p>
@@ -227,6 +232,8 @@ section.active{display:block;}
 
 <div class="script-section">
 <div class="script-h1">第4部：経済編</div>
+<!-- ECONOMY:UPDATE:START -->
+<!-- ECONOMY:UPDATE:END -->
 <div class="alert-box">📈 詳細なグラフは <strong>「経済影響」タブ</strong> をご覧ください。</div>
 <p class="script-p">台湾有事が経済に与える影響は、過去のどの紛争とも比較にならない規模になると言われています。理由は「半導体」です。TSMCは世界の先端半導体（7nm以下）の約90%を製造しています。スマートフォン・PC・自動車・家電・医療機器・軍事システム——すべてに必要な部品がTSMCから来ています。</p>
 <p class="script-p">キヤノングローバル戦略研究所は「台湾有事の結果、世界的な半導体供給の途絶が起きる。最先端のものほどひどくなる。日米欧は代替工場を建設するだろうが、これには数年かかる」と試算しています。</p>
@@ -279,7 +286,7 @@ section.active{display:block;}
 
   <div class="tl-item"><div class="tl-date">2024年<br>11月</div><div class="tl-dot blue-dot"></div>
   <div class="tl-content blue-ev"><div class="tl-ev">🇺🇸 トランプ大統領、再選——「戦略的曖昧性」に揺らぎ</div>
-  <div class="tl-desc">トランプ氏が大統領選で勝利。「台湾は防衛費をGDPの10%払うべき」「習近平とは良い関係」など、台湾防衛への消極的な発言が続き台湾・日本に懸念が広がる。</div></div></div>
+  <div class="tl-desc">トランプ氏が大統領選で勝利。「台湾は防衛費をGDPの10%払うべき」など、台湾防衛への消極的な発言が続き台湾・日本に懸念が広がる。</div></div></div>
 
   <div class="tl-item"><div class="tl-date">2025年<br>12月29日</div><div class="tl-dot major"></div>
   <div class="tl-content major"><div class="tl-ev">🔴 「正義使命-2025」——台湾包囲・実弾演習</div>
@@ -287,8 +294,9 @@ section.active{display:block;}
 
   <div class="tl-item"><div class="tl-date">2026年<br>4月23日</div><div class="tl-dot major"></div>
   <div class="tl-content major"><div class="tl-ev">📍 現在——「静かなる有事」が進行中</div>
-  <div class="tl-desc">軍事衝突は起きていないが、中国の軍事圧力は構造的に継続。TSMCの熊本工場が稼働開始し日本の半導体リスク軽減が進む一方、台湾依存の根本的リスクは残存。トランプ政権下での米国の介入意思が不透明なまま。</div></div></div>
+  <div class="tl-desc">軍事衝突は起きていないが、中国の軍事圧力は構造的に継続。TSMCの熊本工場が稼働開始し日本の半導体リスク軽減が進む一方、台湾依存の根本的リスクは残存。</div></div></div>
 
+<!-- TIMELINE:INSERT -->
 </div>
 </div>
 </section>
@@ -298,6 +306,7 @@ section.active{display:block;}
 <div class="container">
 <div class="section-h"><span class="section-num">🗺</span>台湾海峡マップ：関係国と軍事配置</div>
 <div class="section-sub">台湾を取り囲む地政学的環境と主要軍事拠点</div>
+<!-- MAP:DATETIME -->
 <div class="kpi-grid" style="margin-bottom:20px;">
   <div class="kpi-card"><div class="kpi-num">180<span class="kpi-unit">km</span></div><div class="kpi-desc">台湾海峡の最狭部の幅。日本の与那国島〜台湾は約110km</div></div>
   <div class="kpi-card"><div class="kpi-num">90<span class="kpi-unit">%+</span></div><div class="kpi-desc">世界の最先端半導体（7nm以下）のTSMC依存度</div></div>
@@ -395,6 +404,8 @@ section.active{display:block;}
   <div class="map-leg-item"><div class="m-dot" style="background:#ffd700;"></div><div><div style="font-size:12px;font-weight:700;">💻 TSMC熊本工場</div><div style="font-size:10px;color:var(--gray);">2024年稼働開始。日本の半導体リスク軽減の切り札</div></div></div>
   <div class="map-leg-item"><div class="m-dot" style="background:rgba(184,58,58,0.6);"></div><div><div style="font-size:12px;font-weight:700;">🚀 東風ミサイル射程</div><div style="font-size:10px;color:var(--gray);">台湾・沖縄・グアムをカバー。DF-21D「空母キラー」も保有</div></div></div>
 </div>
+<!-- MAP:REPORT:START -->
+<!-- MAP:REPORT:END -->
 </div>
 </section>
 
@@ -405,7 +416,7 @@ section.active{display:block;}
 <div class="section-sub">台湾有事のカギを握る主要軍事力と装備を解説</div>
 <div class="info-box">💡 核心：中国の「A2/AD（接近阻止・領域拒否）」戦略——米軍が台湾に近づけないようにミサイル・潜水艦・電子戦で包囲する構造的なパワーシフトが進んでいる。</div>
 <div class="weapon-grid">
-
+<!-- WEAPONS:INSERT -->
 <div class="weapon-card">
   <div class="weapon-head"><div class="weapon-icon" style="background:rgba(184,58,58,0.2);">🚀</div><div>
     <div class="weapon-name">東風シリーズ（DF）弾道ミサイル</div>
@@ -553,6 +564,7 @@ section.active{display:block;}
 <div class="container">
 <div class="section-h"><span class="section-num">🏛</span>シンクタンク・専門機関の分析</div>
 <div class="section-sub">防衛研究所・JIIA・JETRO・キヤノングローバル戦略研究所・笹川平和財団などの多角的評価</div>
+<!-- THINKTANK:INSERT -->
 <div class="tt-grid">
   <div class="tt-card"><div class="tt-org">豪州ABC（オーストラリア国営放送）</div><div class="tt-quote">中国は2026年に戦争を始める意思を明言してはいない。しかし、世界に対して「すでに戦争の準備は整っている」という事実を示しているのである。専門家は「中国は台湾を包囲し、外部からの支援を遮断できる能力を示した」と指摘する。</div><div class="tt-date">2025年12月30日（正義使命-2025演習後）</div></div>
   <div class="tt-card"><div class="tt-org">キヤノングローバル戦略研究所（CIGS）</div><div class="tt-quote">台湾有事の結果、世界的な半導体供給の途絶が起きる。これは最先端のものほどひどくなる。日米欧は別途工場を建設するだろうが、これには数年かかる。日本の製造業にとって、台湾有事の経済影響は膨大なものになる。中国が日米欧に持つ資産は凍結され、中国における日本の工場などは接収される。</div><div class="tt-date">2023年（現在も有効な分析）</div></div>
