@@ -11,22 +11,25 @@ const HAS_CLAUDE = !!process.env.ANTHROPIC_API_KEY;
 
 // ── RSS情報源 ──────────────────────────────────
 const RSS_SOURCES = [
-  { name: 'NHK国際',   url: 'https://www3.nhk.or.jp/rss/news/cat6.xml' },
-  { name: 'Al Jazeera', url: 'https://www.aljazeera.com/xml/rss/all.xml' },
-  { name: 'BBC World', url: 'https://feeds.bbci.co.uk/news/world/rss.xml' },
+  { name: 'NHK政治・外交', url: 'https://www3.nhk.or.jp/rss/news/cat4.xml' },
+  { name: 'NHK科学・IT',  url: 'https://www3.nhk.or.jp/rss/news/cat5.xml' },
+  { name: 'Reuters World', url: 'https://feeds.reuters.com/reuters/worldNews' },
+  { name: 'BBC Asia',      url: 'https://feeds.bbci.co.uk/news/asia/rss.xml' },
 ];
 
-// CSIS専用RSSソース（複数URLを試す）
+// 台湾専門RSSソース（複数URLを試す）
 const CSIS_RSS_SOURCES = [
+  'https://focustaiwan.tw/rss',
   'https://www.csis.org/feeds/all/rss.xml',
-  'https://www.csis.org/rss',
-  'https://feeds.feedburner.com/csis-all',
+  'https://www.rfa.org/english/news/china/rss2.xml',
 ];
 
 const KEYWORDS = [
-  'イラン','イスラエル','ガザ','中東','ホルムズ','レバノン','ヒズボラ','ハマス',
-  'iran','israel','gaza','middle east','hezbollah','hamas','hormuz','lebanon',
-  'パレスチナ','palestine','ネタニヤフ','netanyahu','テヘラン','tehran'
+  '台湾','台湾海峡','半導体','TSMC','習近平','頼清徳','中国軍',
+  '台湾有事','人民解放軍','南シナ海','東シナ海','与那国','尖閣',
+  '中国製造','対中','対台湾',
+  'taiwan','tsmc','xi jinping','semiconductor','strait','pla navy',
+  'china taiwan','chinese military','taipei','beijing taiwan'
 ];
 
 // ── RSS取得 ────────────────────────────────────
@@ -58,7 +61,21 @@ async function fetchRSS(source) {
 
 function isRelevant(item) {
   const text = `${item.title} ${item.desc}`.toLowerCase();
-  return KEYWORDS.some(kw => text.includes(kw.toLowerCase()));
+  // 台湾に直接関係するキーワードが含まれているか確認
+  const directKeys = [
+    '台湾','tsmc','台湾海峡','頼清徳','taiwan strait','taipei',
+    'china taiwan','chinese military exercises','pla','半導体供給'
+  ];
+  const generalKeys = KEYWORDS.map(k => k.toLowerCase());
+  const hasGeneral = generalKeys.some(kw => text.includes(kw));
+  if (!hasGeneral) return false;
+  // 中東・ウクライナ関連ニュースを除外
+  const excludeKeys = [
+    'イラン','iran','ガザ','gaza','ウクライナ','ukraine','russia','ロシア',
+    'israel','イスラエル','ホルムズ','hormuz','hezbollah','ヒズボラ'
+  ];
+  const hasExclude = excludeKeys.some(kw => text.includes(kw));
+  return hasGeneral && !hasExclude;
 }
 
 // ── Claude API ────────────────────────────────
@@ -102,14 +119,14 @@ function writeHTML(html)  { fs.writeFileSync('index.html', html, 'utf8'); }
 // CSIS最新レポートを戦況マップに表示
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async function updateCSISReport(html) {
-  if (!html.includes('<!-- MAP:CSIS:START -->')) return html;
+  if (!html.includes('<!-- MAP:REPORT:START -->')) return html;
   console.log('\n🔍 CSIS中東レポートを取得中...');
 
   let csisArticles = [];
   for (const url of CSIS_RSS_SOURCES) {
     const items = await fetchRSS({ name: 'CSIS', url });
     const filtered = items.filter(a =>
-      /iran|israel|middle east|gulf|saudi|hormuz|hamas|hezbollah/i.test(a.title + a.desc)
+      /taiwan|china|tsmc|semiconductor|strait|pla|indo-pacific/i.test(a.title + a.desc)
     );
     if (filtered.length > 0) {
       csisArticles = filtered;
@@ -132,21 +149,21 @@ async function updateCSISReport(html) {
     return `
     <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;gap:3px;">
       <a href="${a.link || '#'}" target="_blank" rel="noopener"
-         style="font-size:12px;color:#d5e8f0;text-decoration:none;line-height:1.5;font-weight:500;"
-         onmouseover="this.style.color='#5b9bd5'"
-         onmouseout="this.style.color='#d5e8f0'">
+         style="font-size:12px;color:#d8cccc;text-decoration:none;line-height:1.5;font-weight:500;"
+         onmouseover="this.style.color='#e87c7c'"
+         onmouseout="this.style.color='#d8cccc'">
         ${title}
       </a>
       ${date ? `<span style="font-size:10px;color:var(--gray);">${date}</span>` : ''}
     </li>`;
   }).join('');
 
-  const csisBlock = `<!-- MAP:CSIS:START -->
+  const csisBlock = `<!-- MAP:REPORT:START -->
 <div style="margin-top:20px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-    <div style="font-family:'Noto Serif JP';font-size:15px;font-weight:700;color:#5b9bd5;">
-      🆙 CSIS 中東分析レポート
-      <span style="font-size:10px;font-weight:400;color:var(--gray);margin-left:8px;">Center for Strategic and International Studies</span>
+    <div style="font-family:'Noto Serif JP';font-size:15px;font-weight:700;color:#e87c7c;">
+      🆙 台湾・インド太平洋レポート
+      <span style="font-size:10px;font-weight:400;color:var(--gray);margin-left:8px;">CSIS / Focus Taiwan / CNA</span>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
       <span style="width:7px;height:7px;border-radius:50%;background:#e74c3c;animation:blink 1.2s ease-in-out infinite;display:inline-block;"></span>
@@ -157,17 +174,17 @@ async function updateCSISReport(html) {
     ${listItems}
   </ul>
   <div style="margin-top:10px;display:flex;align-items:center;justify-content:space-between;">
-    <span style="font-size:10px;color:var(--gray);">※ CSIS公式サイトより自動収集。中東関連のみ表示。</span>
+    <span style="font-size:10px;color:var(--gray);">※ CSIS公式サイトより自動収集。台湾・中国関連のみ表示。</span>
     <a href="https://www.csis.org/topics/conflict-and-stabilization/middle-east" target="_blank" rel="noopener"
        style="font-size:10px;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">
-      CSIS公式サイト →
+      情報源 →
     </a>
   </div>
 </div>
-<!-- MAP:CSIS:END -->`;
+<!-- MAP:REPORT:END -->`;
 
   html = html.replace(
-    /<!-- MAP:CSIS:START -->[\s\S]*?<!-- MAP:CSIS:END -->/,
+    /<!-- MAP:REPORT:START -->[\s\S]*?<!-- MAP:REPORT:END -->/,
     csisBlock
   );
   console.log(`  ✅ CSISレポート ${csisArticles.slice(0,10).length}件を表示`);
@@ -185,7 +202,7 @@ async function updateNewsBox(html, articles) {
       .map((a, i) => `${i+1}. [${a.source}] ${a.title}`)
       .join('\n');
     summary = await callClaude(
-`あなたは中東情勢の専門アナリストです。以下の最新ニュースをもとに${TODAY}時点の情勢を日本語で要約してください。
+`あなたは中国・台湾問題の専門アナリストです。以下の最新ニュースをもとに${TODAY}時点の情勢を日本語で要約してください。
 【出力ルール】箇条書き（• で始まる）で3〜5点。生テキストのみ出力（HTMLタグ・マークダウン不要）。
 【ニュース】\n${headlines}`, 500
     );
@@ -194,14 +211,14 @@ async function updateNewsBox(html, articles) {
   const articleItems = articles.slice(0, 6).map(a => {
     const t = a.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     return `<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-      <span style="background:rgba(46,117,182,0.15);border:1px solid rgba(46,117,182,0.3);border-radius:3px;padding:1px 6px;font-size:10px;color:#5b9bd5;white-space:nowrap;flex-shrink:0;">${a.source}</span>
-      <a href="${a.link||'#'}" target="_blank" rel="noopener" style="font-size:12px;color:#ccd8e4;text-decoration:none;line-height:1.5;">${t}</a>
+      <span style="background:rgba(184,58,58,0.15);border:1px solid rgba(184,58,58,0.3);border-radius:3px;padding:1px 6px;font-size:10px;color:#e87c7c;white-space:nowrap;flex-shrink:0;">${a.source}</span>
+      <a href="${a.link||'#'}" target="_blank" rel="noopener" style="font-size:12px;color:#d8cccc;text-decoration:none;line-height:1.5;">${t}</a>
     </div>`;
   }).join('\n');
 
   const summaryHTML = summary
     ? summary.split('\n').filter(l=>l.trim())
-        .map(l=>`<p style="font-size:12px;line-height:1.8;color:#ccd8e4;margin:3px 0;">${l.trim()}</p>`)
+        .map(l=>`<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">${l.trim()}</p>`)
         .join('\n')
     : '';
 
@@ -211,9 +228,9 @@ async function updateNewsBox(html, articles) {
     <div style="font-family:'Noto Serif JP';font-size:15px;font-weight:700;color:#FFD700;">🆙 最新ニュース</div>
     <div style="font-size:10px;color:var(--gray);">自動更新：${TODAY}</div>
   </div>
-  ${summaryHTML ? `<div style="background:rgba(46,117,182,0.06);border-radius:6px;padding:12px;margin-bottom:12px;border-left:3px solid #2e75b6;"><div style="font-size:10px;color:var(--gold);letter-spacing:1px;margin-bottom:6px;">🤖 AI要約</div>${summaryHTML}</div>` : ''}
+  ${summaryHTML ? `<div style="background:rgba(184,58,58,0.06);border-radius:6px;padding:12px;margin-bottom:12px;border-left:3px solid #b83a3a;"><div style="font-size:10px;color:var(--gold);letter-spacing:1px;margin-bottom:6px;">🤖 AI要約</div>${summaryHTML}</div>` : ''}
   <div style="display:flex;flex-direction:column;gap:0;">${articleItems}</div>
-  <div style="margin-top:8px;font-size:10px;color:var(--gray);">※ NHK・Al Jazeera・BBC より自動収集。内容は各情報源でご確認ください。</div>
+  <div style="margin-top:8px;font-size:10px;color:var(--gray);">※ NHK・Reuters・BBC より自動収集。内容は各情報源でご確認ください。</div>
 </div>
 <!-- NEWS_END -->`;
 
@@ -260,7 +277,7 @@ function updateTimelineNotice(html, item) {
   const descText  = descMatch ? descMatch[1].trim()  : '';
   if (!evText) return html;
   const notice = `<!-- TIMELINE:UPDATE:START -->
-<div style="background:rgba(46,117,182,0.08);border-left:3px solid #2e75b6;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
+<div style="background:rgba(184,58,58,0.08);border-left:3px solid #b83a3a;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
   <div style="font-size:10px;color:var(--gold);letter-spacing:1.5px;margin-bottom:5px;font-family:'Oswald';">🆙 最新タイムライン更新（${TODAY}）</div>
   <div style="font-size:13px;font-weight:700;color:#FFD700;">${evText}</div>
   ${descText ? `<div style="font-size:12px;color:var(--gray);margin-top:3px;">${descText}</div>` : ''}
@@ -291,10 +308,10 @@ function updateMapDatetime(html) {
 
   if (html.includes('<!-- WAR:UPDATE:START -->')) {
     const notice = `<!-- WAR:UPDATE:START -->
-<div style="background:rgba(46,117,182,0.08);border-left:3px solid #2e75b6;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
+<div style="background:rgba(184,58,58,0.08);border-left:3px solid #b83a3a;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
   <div style="font-size:10px;color:var(--gold);letter-spacing:1.5px;margin-bottom:5px;font-family:'Oswald';">🆙 戦況マップ更新</div>
   <div style="font-size:13px;font-weight:700;color:#FFD700;">${datetime}現在の戦況図</div>
-  <div style="font-size:11px;color:var(--gray);margin-top:3px;">詳細は「<a href="#" onclick="show('map');return false;" style="color:#5b9bd5;text-decoration:none;">戦況マップ</a>」タブをご覧ください</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:3px;">詳細は「<a href="#" onclick="show('map');return false;" style="color:#e87c7c;text-decoration:none;">戦況マップ</a>」タブをご覧ください</div>
 </div>
 <!-- WAR:UPDATE:END -->`;
     html = html.replace(/<!-- WAR:UPDATE:START -->[\s\S]*?<!-- WAR:UPDATE:END -->/, notice);
@@ -313,7 +330,7 @@ function updateMapDatetime(html) {
 async function updateEconomyNotice(html, articles) {
   if (!html.includes('<!-- ECONOMY:UPDATE:START -->')) return html;
   const econArticles = articles.filter(a =>
-    /原油|石油|ガソリン|エネルギー|ホルムズ|経済|制裁|LNG|oil|energy|sanction|price/i
+    /半導体|TSMC|サプライチェーン|貿易|経済|制裁|輸出規制|semiconductor|supply chain|trade|sanction/i
       .test(a.title + a.desc)
   ).slice(0, 5);
   if (econArticles.length === 0) { console.log('  ⚠ 経済ニュースなし・スキップ'); return html; }
@@ -338,15 +355,15 @@ JSON形式のみ: {"source_num": 番号, "topic": "トピック名（15文字以
     } catch(e) {}
   }
 
-  const linkO = url ? `<a href="${url}" target="_blank" rel="noopener" style="color:#5b9bd5;text-decoration:none;border-bottom:1px solid rgba(91,155,213,0.3);">` : '<span style="color:#5b9bd5;">';
+  const linkO = url ? `<a href="${url}" target="_blank" rel="noopener" style="color:#e87c7c;text-decoration:none;border-bottom:1px solid rgba(232,124,124,0.3);">` : '<span style="color:#e87c7c;">';
   const linkC = url ? '</a>' : '</span>';
 
   const notice = `<!-- ECONOMY:UPDATE:START -->
-<div style="background:rgba(46,117,182,0.08);border-left:3px solid #2e75b6;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
+<div style="background:rgba(184,58,58,0.08);border-left:3px solid #b83a3a;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
   <div style="font-size:10px;color:var(--gold);letter-spacing:1.5px;margin-bottom:5px;font-family:'Oswald';">🆙 最新情報（${TODAY}）</div>
   <div style="font-size:13px;font-weight:700;color:#FFD700;">${linkO}${topic}について更新${linkC}</div>
   ${summary ? `<div style="font-size:12px;color:var(--gray);margin-top:3px;">${summary}</div>` : ''}
-  <div style="font-size:11px;color:var(--gray);margin-top:4px;">詳細は「<a href="#" onclick="show('economy');return false;" style="color:#5b9bd5;text-decoration:none;">経済影響</a>」タブをご覧ください</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:4px;">詳細は「<a href="#" onclick="show('economy');return false;" style="color:#e87c7c;text-decoration:none;">経済影響</a>」タブをご覧ください</div>
 </div>
 <!-- ECONOMY:UPDATE:END -->`;
   html = html.replace(/<!-- ECONOMY:UPDATE:START -->[\s\S]*?<!-- ECONOMY:UPDATE:END -->/, notice);
@@ -360,7 +377,7 @@ JSON形式のみ: {"source_num": 番号, "topic": "トピック名（15文字以
 async function prependWeapons(html, articles) {
   if (!html.includes('<!-- WEAPONS:INSERT -->')) return html;
   const weaponArticles = articles.filter(a =>
-    /ミサイル|兵器|武器|爆撃|F-35|B-2|ドローン|防空|missile|weapon|strike|drone|f-35|stealth/i
+    /ミサイル|兵器|武器|演習|艦艇|ドローン|軍事|missile|weapon|military|pla|navy|exercise/i
       .test(a.title + a.desc)
   ).slice(0, 6);
   if (weaponArticles.length === 0) { console.log('  ⚠ 兵器ニュースなし'); return html; }
@@ -385,7 +402,7 @@ JSON形式のみ: {"skip": false, "source_nums": [番号], "icon": "絵文字", 
   if (parsed.skip || !parsed.name) { console.log('  ⚠ 追記なし'); return html; }
 
   const card = `<div class="weapon-card">
-  <div class="weapon-head"><div class="weapon-icon" style="background:rgba(46,117,182,0.2);">${parsed.icon||'🚀'}</div>
+  <div class="weapon-head"><div class="weapon-icon" style="background:rgba(184,58,58,0.2);">${parsed.icon||'🚀'}</div>
   <div><div class="weapon-name">${parsed.name}</div><div class="weapon-type">${parsed.type||''}</div></div></div>
   <span class="weapon-tag" style="background:rgba(255,215,0,0.15);color:#FFD700;">🆙 ${TODAY_ISO} 新着</span>
   <div class="spec-row"><span class="spec-label">概要</span><span class="spec-val">${parsed.summary||''}</span></div>
@@ -398,7 +415,7 @@ JSON形式のみ: {"skip": false, "source_nums": [番号], "icon": "絵文字", 
     const sourceNums = Array.isArray(parsed.source_nums) ? parsed.source_nums : [parsed.source_nums];
     const links = sourceNums.filter(n=>urlMap[n]?.url).map(n => {
       const a = urlMap[n];
-      return `<li style="margin:4px 0;"><a href="${a.url}" target="_blank" rel="noopener" style="color:#5b9bd5;font-size:11px;text-decoration:none;border-bottom:1px solid rgba(91,155,213,0.3);">[${a.source}] ${a.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</a></li>`;
+      return `<li style="margin:4px 0;"><a href="${a.url}" target="_blank" rel="noopener" style="color:#e87c7c;font-size:11px;text-decoration:none;border-bottom:1px solid rgba(232,124,124,0.3);">[${a.source}] ${a.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</a></li>`;
     }).join('\n');
     if (links) {
       const srcBlock = `<!-- WEAPONS:SOURCES -->
@@ -433,7 +450,7 @@ async function prependThinktank(html, articles) {
 
   console.log('\n🏛 シンクタンクを更新中...');
   const result = await callClaude(
-`中東情勢の専門アナリストとして、以下のニュースをもとに${TODAY}の分析・見解を1件作成してください。
+`中国・台湾問題の専門アナリストとして、以下のニュースをもとに${TODAY}の分析・見解を1件作成してください。
 JSON形式のみ: {"skip": false, "source_num": 番号, "org": "機関名・メディア名", "quote": "分析（80〜120文字）"}
 重要分析なければ {"skip": true}
 【ニュース】\n${news}`, 300
@@ -463,7 +480,7 @@ JSON形式のみ: {"skip": false, "source_num": 番号, "org": "機関名・メ�
 // メイン処理
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async function main() {
-  console.log('\n🚀 中東戦争レポート 毎日自動更新 開始');
+  console.log('\n🚀 台湾有事レポート 毎日自動更新 開始');
   console.log(`   実行日時: ${TODAY}`);
   console.log(`   Claude API: ${HAS_CLAUDE ? '✅ 利用可能' : '⚠ なし（見出しのみ）'}\n`);
 
@@ -499,7 +516,7 @@ async function main() {
 
   writeHTML(html);
   fs.writeFileSync('scripts/last-update.json', JSON.stringify({ date: new Date().toISOString(), articles: articles.length }), 'utf8');
-  console.log('\n🎉 中東レポート自動更新完了！');
+  console.log('\n🎉 台湾有事レポート自動更新完了！');
 }
 
 main().catch(err => { console.error('❌ エラー:', err.message); process.exit(1); });
