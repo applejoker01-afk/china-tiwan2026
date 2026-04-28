@@ -195,13 +195,13 @@ async function updateNewsBox(html, articles) {
     const t = a.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     return `<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
       <span style="background:rgba(184,58,58,0.15);border:1px solid rgba(184,58,58,0.3);border-radius:3px;padding:1px 6px;font-size:10px;color:#e87c7c;white-space:nowrap;flex-shrink:0;">${a.source}</span>
-      <a href="${a.link||'#'}" target="_blank" rel="noopener" style="font-size:12px;color:#ccd8e4;text-decoration:none;line-height:1.5;">${t}</a>
+      <a href="${a.link||'#'}" target="_blank" rel="noopener" style="font-size:12px;color:#d8cccc;text-decoration:none;line-height:1.5;">${t}</a>
     </div>`;
   }).join('\n');
 
   const summaryHTML = summary
     ? summary.split('\n').filter(l=>l.trim())
-        .map(l=>`<p style="font-size:12px;line-height:1.8;color:#ccd8e4;margin:3px 0;">${l.trim()}</p>`)
+        .map(l=>`<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">${l.trim()}</p>`)
         .join('\n')
     : '';
 
