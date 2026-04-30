@@ -4,9 +4,14 @@ on:
   push:
     branches: [ main ]
   schedule:
-    # 毎日午前9時(日本時間18時)に自動実行
+    # 毎日午前9時(UTC) = 日本時間18時に自動実行
     - cron: '0 9 * * *'
   workflow_dispatch:  # 手動実行も可能
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -14,17 +19,18 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           
       - name: Install dependencies
         run: |
           cd scripts
           npm install
+        continue-on-error: true
           
       - name: Fetch latest Taiwan news
         run: |
@@ -40,24 +46,27 @@ jobs:
       - name: Build archive index
         run: |
           node scripts/build-archive.js
+        continue-on-error: true
           
       - name: Generate Note draft
         run: |
           node scripts/post-to-note.js
         env:
           PAGES_URL: ${{ secrets.PAGES_URL }}
+        continue-on-error: true
           
       - name: Upload Note draft
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: NOTE-DRAFT
           path: note-draft.txt
+        continue-on-error: true
           
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add archive/
+          git add archive/ news-update.log
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update: $(date +%Y-%m-%d)"
         continue-on-error: true
         
@@ -66,7 +75,7 @@ jobs:
         continue-on-error: true
           
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
