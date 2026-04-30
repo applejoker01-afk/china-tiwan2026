@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="中国・台湾有事レポート2026｜台湾海峡危機の全貌">
+<meta property="og:description" content="中国の台湾包囲演習から半導体サプライチェーン断絶リスクまで。防衛研究所・JIIA・JETRO・キヤノングローバル戦略研究所などの分析を統合。">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<title>中国・台湾有事レポート2026｜台湾海峡危機と日本への影響</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&family=Oswald:wght@400;700&display=swap');
+:root{
+  --navy:#1a0d0d;--dark-blue:#3a1a1a;--mid-blue:#b83a3a;--light-blue:#e87c7c;
+  --gold:#c9a84c;--red:#c0392b;--orange:#e67e22;--white:#f4f0f0;--gray:#aa8899;
+  --panel:rgba(255,255,255,0.03);--border:rgba(184,58,58,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--navy);color:var(--white);font-family:'Noto Sans JP',sans-serif;line-height:1.7;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(26,13,13,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 24px;height:56px;gap:4px;flex-wrap:wrap;}
+.nav-logo{font-family:'Oswald';font-size:16px;color:var(--gold);letter-spacing:2px;margin-right:16px;white-space:nowrap;text-decoration:none;cursor:pointer;}
+.nav-btn{padding:5px 12px;border-radius:4px;border:1px solid transparent;background:transparent;color:var(--gray);font-size:12px;cursor:pointer;font-family:'Noto Sans JP';transition:all .2s;white-space:nowrap;}
+.nav-btn.active,.nav-btn:hover{background:var(--mid-blue);color:#fff;border-color:var(--mid-blue);}
+
+/* ── SECTIONS ── */
+section{display:none;animation:fadeIn .35s ease;}
+section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.container{max-width:960px;margin:0 auto;padding:40px 24px 80px;}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:60px 24px 48px;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,58,58,0.15) 0%,transparent 70%);border-bottom:1px solid var(--border);}
+.hero-eyebrow{font-family:'Oswald';letter-spacing:4px;color:var(--gold);font-size:12px;margin-bottom:14px;text-transform:uppercase;}
+.hero-title{font-family:'Noto Serif JP';font-size:clamp(24px,4vw,48px);font-weight:900;line-height:1.25;margin-bottom:14px;}
+.hero-title span{color:var(--gold);}
+.hero-sub{color:var(--gray);font-size:14px;max-width:640px;margin:0 auto 28px;}
+.badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;border:1px solid;}
+.badge-red{border-color:var(--red);color:var(--red);}
+.badge-blue{border-color:var(--mid-blue);color:var(--light-blue);}
+.badge-gold{border-color:var(--gold);color:var(--gold);}
+
+/* ── 解説スタイル ── */
+.script-section{margin-bottom:40px;}
+.script-h1{font-family:'Noto Serif JP';font-size:22px;font-weight:700;color:var(--light-blue);border-bottom:2px solid var(--mid-blue);padding-bottom:8px;margin:36px 0 16px;}
+.script-h2{font-family:'Noto Serif JP';font-size:17px;font-weight:700;color:var(--gold);margin:24px 0 10px;}
+.script-p{font-size:14px;line-height:1.9;color:#d8cccc;margin-bottom:12px;}
+.note-box{background:rgba(184,58,58,0.08);border-left:3px solid var(--mid-blue);padding:10px 16px;border-radius:0 6px 6px 0;font-size:12px;color:var(--gray);margin:10px 0 16px;font-style:italic;}
+.bullet-list{list-style:none;padding-left:0;margin:8px 0 14px;}
+.bullet-list li{padding:4px 0 4px 20px;position:relative;font-size:14px;color:#d8cccc;}
+.bullet-list li::before{content:"▶";position:absolute;left:0;color:var(--mid-blue);font-size:10px;top:6px;}
+
+/* ── INFO TABLE ── */
+.info-table{width:100%;border-collapse:separate;border-spacing:0 4px;margin:12px 0 20px;}
+.info-table th{background:var(--dark-blue);color:var(--white);font-size:12px;font-weight:700;padding:10px 14px;text-align:left;}
+.info-table th:first-child{border-radius:6px 0 0 0;}
+.info-table th:last-child{border-radius:0 6px 0 0;}
+.info-table td{padding:9px 14px;font-size:13px;}
+.info-table tr td:first-child{background:rgba(58,26,26,0.5);font-weight:700;color:var(--light-blue);}
+.info-table tr td:last-child{background:rgba(58,26,26,0.25);color:#d8cccc;}
+
+/* ── WEAPON CARDS ── */
+.weapon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:16px 0;}
+.weapon-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .3s;}
+.weapon-card:hover{border-color:var(--mid-blue);transform:translateY(-2px);}
+.weapon-head{padding:16px 18px;display:flex;align-items:flex-start;gap:12px;}
+.weapon-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.weapon-name{font-family:'Oswald';font-size:16px;letter-spacing:1px;margin-bottom:3px;}
+.weapon-type{font-size:11px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;}
+.spec-row{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 18px;border-top:1px solid rgba(255,255,255,0.05);font-size:12px;gap:8px;}
+.spec-label{color:var(--gray);flex-shrink:0;width:100px;}
+.spec-val{font-weight:700;color:var(--white);text-align:right;font-size:11px;}
+.weapon-tag{display:inline-block;margin:0 18px 14px;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:1px;}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;max-width:860px;margin:0 auto;}
+.timeline::before{content:'';position:absolute;left:110px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--mid-blue),rgba(184,58,58,0.1));}
+.tl-item{display:flex;margin-bottom:6px;position:relative;}
+.tl-date{width:110px;flex-shrink:0;text-align:right;padding-right:24px;padding-top:14px;font-family:'Oswald';font-size:12px;color:var(--gold);line-height:1.3;}
+.tl-dot{position:absolute;left:104px;top:16px;width:14px;height:14px;border-radius:50%;background:var(--mid-blue);border:3px solid var(--navy);z-index:1;}
+.tl-dot.major{background:var(--gold);width:18px;height:18px;left:102px;top:14px;}
+.tl-dot.red-dot{background:var(--red);}
+.tl-dot.blue-dot{background:#3a6fbf;}
+.tl-content{flex:1;padding:12px 18px;margin-left:22px;background:var(--panel);border:1px solid var(--border);border-radius:8px;transition:border-color .2s;}
+.tl-content:hover{border-color:var(--mid-blue);}
+.tl-content.major{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.05);}
+.tl-content.danger{border-color:rgba(192,57,43,0.4);background:rgba(192,57,43,0.05);}
+.tl-content.blue-ev{border-color:rgba(58,127,191,0.4);background:rgba(58,127,191,0.05);}
+.tl-ev{font-weight:700;font-size:14px;margin-bottom:4px;}
+.tl-desc{font-size:12px;color:var(--gray);line-height:1.6;}
+
+/* ── ECONOMY ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0;}
+.kpi-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;}
+.kpi-num{font-family:'Oswald';font-size:32px;color:var(--gold);line-height:1;}
+.kpi-unit{font-size:14px;color:var(--gray);margin-left:3px;}
+.kpi-desc{font-size:11px;color:var(--gray);margin-top:6px;line-height:1.5;}
+.price-track{position:relative;display:flex;flex-direction:column;gap:0;}
+.price-track::before{content:'';position:absolute;left:100px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),var(--light-blue));}
+.price-row{display:flex;align-items:center;padding:5px 0;}
+.price-date{width:100px;text-align:right;padding-right:18px;font-size:11px;color:var(--gray);flex-shrink:0;}
+.price-dot-wrap{width:18px;flex-shrink:0;display:flex;justify-content:center;}
+.p-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--navy);}
+.price-content{margin-left:8px;display:flex;align-items:center;gap:8px;}
+.price-bar{height:22px;border-radius:0 4px 4px 0;display:flex;align-items:center;padding:0 10px;}
+.p-bar-val{font-family:'Oswald';font-size:14px;font-weight:700;white-space:nowrap;}
+.price-note{font-size:10px;color:var(--gray);}
+.impact-table{width:100%;border-collapse:separate;border-spacing:0 5px;}
+.impact-table th{font-size:10px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;padding-bottom:6px;text-align:left;}
+.impact-table td{padding:9px 12px;font-size:12px;}
+.impact-table tr td:first-child{border-radius:6px 0 0 6px;background:rgba(58,26,26,0.5);font-weight:700;color:var(--light-blue);}
+.impact-table tr td:last-child{border-radius:0 6px 6px 0;background:rgba(58,26,26,0.25);color:#d8cccc;}
+
+/* ── THINKTANK ── */
+.tt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;}
+.tt-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:18px;border-left:3px solid var(--mid-blue);}
+.tt-org{font-family:'Oswald';font-size:12px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;}
+.tt-quote{font-size:12px;line-height:1.8;color:#d8cccc;font-style:italic;margin-bottom:8px;}
+.tt-date{font-size:10px;color:var(--gray);}
+.tt-org a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);transition:border-color .2s;}
+.tt-org a:hover{border-bottom-color:var(--gold);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* ── MAP ── */
+.map-wrap{background:rgba(58,26,26,0.2);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.map-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:16px;}
+.map-leg-item{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:8px 12px;}
+.m-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+
+/* ── UTILITY ── */
+.section-h{font-family:'Noto Serif JP';font-size:22px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.section-num{width:32px;height:32px;border-radius:50%;background:var(--mid-blue);display:flex;align-items:center;justify-content:center;font-family:'Oswald';font-size:15px;flex-shrink:0;}
+.section-sub{color:var(--gray);font-size:13px;margin-bottom:28px;margin-left:42px;}
+.alert-box{background:rgba(184,58,58,0.08);border:1px solid rgba(184,58,58,0.4);border-radius:8px;padding:12px 16px;margin:14px 0;font-size:13px;color:#e8b4ae;line-height:1.7;}
+.info-box{background:rgba(58,127,191,0.08);border:1px solid rgba(58,127,191,0.4);border-radius:8px;padding:12px 16px;margin:14px 0;font-size:13px;color:#aec8e8;line-height:1.7;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr;}.tl-date{width:70px;font-size:10px;}.timeline::before{left:70px;}.tl-dot{left:64px;}.tl-content{margin-left:14px;}.weapon-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="./index.html">🇹🇼 台湾有事レポート</a>
+  <button class="nav-btn active" onclick="show('script')">📄 解説</button>
+  <button class="nav-btn" onclick="show('timeline')">📅 タイムライン</button>
+  <button class="nav-btn" onclick="show('map')">🗺 戦況マップ</button>
+  <button class="nav-btn" onclick="show('weapons')">🔫 軍事力比較</button>
+  <button class="nav-btn" onclick="show('economy')">📈 経済影響</button>
+  <button class="nav-btn" onclick="show('thinktank')">🏛 シンクタンク</button>
+  <button class="nav-btn" onclick="window.location.href='archive/index.html'">📚 過去のアーカイブ</button>
+  <div id="nav-time" style="margin-left:auto;font-size:11px;color:var(--gray);white-space:nowrap;padding-right:4px;"></div>
+</nav>
+
+<!-- ════ 解説 ════ -->
+<section id="script" class="active">
+<div class="hero">
+  <div class="hero-eyebrow">Deep Research Report｜2026年4月</div>
+  <h1 class="hero-title">台湾海峡に走る<span>緊張</span>——中国の包囲演習と<br>「半導体の盾」が揺れる世界</h1>
+  <p class="hero-sub">防衛研究所・JIIA・JETRO・キヤノングローバル戦略研究所・笹川平和財団などの分析を統合し、軍事・半導体・経済の3視点から多角的に評価</p>
+  <div class="badges">
+    <span class="badge badge-red">⚠ 緊張継続中</span>
+    <span class="badge badge-blue">🔬 半導体サプライチェーン危機</span>
+    <span class="badge badge-gold">🇯🇵 日本への直接影響</span>
+  </div>
+</div>
+
+<div class="container">
+<!-- NEWS_START -->
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px;margin:20px 0;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+    <div style="font-family:'Noto Serif JP';font-size:15px;font-weight:700;color:#FFD700;">🆙 最新ニュース</div>
+    <div style="font-size:10px;color:var(--gray);">自動更新：2026年4月28日(火)</div>
+  </div>
+  <div style="background:rgba(184,58,58,0.06);border-radius:6px;padding:12px;margin-bottom:12px;border-left:3px solid #b83a3a;"><div style="font-size:10px;color:var(--gold);letter-spacing:1px;margin-bottom:6px;">🤖 AI要約</div><p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">申し訳ございませんが、提供いただいたニュースは中国・台湾問題と直接的な関連がありません。</p>
+<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">デンソーのローム買収提案の取り下げと日本の株価動向についてのニュースですが、これらは日本国内の企業買収や金融市場に関する話題であり、中国・台湾問題の専門アナリストとして分析する対象ではございません。</p>
+<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">2026年4月28日時点の中国・台湾情勢を分析するには、以下のような関連ニュースが必要です：</p>
+<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">• 両岸関係の政治的動向</p>
+<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">• 台湾海峡での軍事活動</p>
+<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">• 米国の対台湾政策の変化</p>
+<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">• 国際的な台湾問題への対応</p>
+<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">• 経済面での両岸交流の状況</p>
+<p style="font-size:12px;line-height:1.8;color:#d8cccc;margin:3px 0;">より適切なニュースソースをご提供いただければ、専門的な分析をお示しすることが可能です。</p></div>
+  <div style="display:flex;flex-direction:column;gap:0;"><div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+      <span style="background:rgba(184,58,58,0.15);border:1px solid rgba(184,58,58,0.3);border-radius:3px;padding:1px 6px;font-size:10px;color:#e87c7c;white-space:nowrap;flex-shrink:0;">NHK科学・IT</span>
+      <a href="http://www3.nhk.or.jp/news/html/20260428/k10015110141000.html" target="_blank" rel="noopener" style="font-size:12px;color:#d8cccc;text-decoration:none;line-height:1.5;">デンソー ロームへの買収提案 取り下げを正式決定</a>
+    </div>
+<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+      <span style="background:rgba(184,58,58,0.15);border:1px solid rgba(184,58,58,0.3);border-radius:3px;padding:1px 6px;font-size:10px;color:#e87c7c;white-space:nowrap;flex-shrink:0;">NHK科学・IT</span>
+      <a href="http://www3.nhk.or.jp/news/html/20260428/k10015109931000.html" target="_blank" rel="noopener" style="font-size:12px;color:#d8cccc;text-decoration:none;line-height:1.5;">株価 終値6万円割れ 日銀の追加利上げ意識される</a>
+    </div></div>
+  <div style="margin-top:8px;font-size:10px;color:var(--gray);">※ NHK・Reuters・BBC より自動収集。内容は各情報源でご確認ください。</div>
+</div>
+<!-- NEWS_END -->
+<div class="script-section">
+<div class="script-h1">📋 全体構成</div>
+<table class="info-table">
+  <thead><tr><th>セクション</th><th>内容</th></tr></thead>
+  <tbody>
+    <tr><td>全体概要</td><td>タイトルカード・概要説明</td></tr>
+    <tr><td>第1部：背景編</td><td>なぜ中国は台湾を狙うのか？</td></tr>
+    <tr><td>第2部：軍事編</td><td>中国軍の包囲演習と軍事力（地図解説付き）</td></tr>
+    <tr><td>第3部：兵器編</td><td>中国・台湾・米国の主要軍事力を比較解説</td></tr>
+    <tr><td>第4部：経済編</td><td>半導体サプライチェーンと日本経済への影響</td></tr>
+    <tr><td>クロージング</td><td>日本はどう備えるべきか</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="script-section">
+<div class="script-h1">🗒 全体概要</div>
+<p class="script-p">みなさん、こんにちは。今日は、世界で最も注目される地政学リスクのひとつ——中国と台湾をめぐる緊張についてレポートします。</p>
+<p class="script-p">2025年12月、中国軍は台湾を取り囲む大規模な実弾演習「正義使命-2025」を実施しました。130機の軍用機が確認され、そのうち90機が台湾海峡の中間線を越えました。オーストラリアのABCは「中国は2026年に戦争を始める意思を明言していない。しかし、すでに戦争の準備は整っているという事実を世界に示している」と報じました。</p>
+<p class="script-p">この問題が日本にとって他人事ではない最大の理由が「半導体」です。世界の最先端半導体の90%以上がTSMC——台湾積体電路製造——1社に集中しています。もし台湾有事が起これば、スマートフォン、自動車、家電、医療機器——あらゆるものの生産が止まります。</p>
+<p class="script-p">今日は、①中国の軍事的脅威の実態、②米中・台湾の軍事力比較、③半導体を軸にした経済影響という3つの視点から解説します。</p>
+</div>
+
+<div class="script-section">
+<div class="script-h1">第1部：背景編</div>
+<!-- TIMELINE:UPDATE:START -->
+<div style="background:rgba(46,117,182,0.08);border-left:3px solid #2e75b6;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
+  <div style="font-size:10px;color:var(--gold);letter-spacing:1.5px;margin-bottom:5px;font-family:'Oswald';">🆙 最新タイムライン更新（2026年4月28日(火)）</div>
+  <div style="font-size:13px;font-weight:700;color:#FFD700;">🕊️ NPT再検討会議開幕</div>
+  <div style="font-size:12px;color:var(--gray);margin-top:3px;">米国とイランが非難の応酬。核不拡散条約の再検討会議が冒頭から対立</div>
+</div>
+<!-- TIMELINE:UPDATE:END -->
+
+<div class="script-h2">① 「一つの中国」——なぜ中国は台湾を狙うのか</div>
+<p class="script-p">中国共産党は「台湾は中国領土の一部」という「一つの中国」原則を国是としています。一方、台湾は1949年以来、独自の政府・軍隊・民主主義制度を持つ事実上の独立国家として機能しています。</p>
+<p class="script-p">習近平国家主席は「台湾統一は我々の世代で達成する」と繰り返し表明。米国の「戦略的曖昧性」——台湾が攻撃された場合に米国が軍事介入するかどうかを意図的に明言しない政策——が、これまで70年間の台湾海峡の平和を保ってきましたが、近年その効果が薄れていると指摘されています。</p>
+
+<div class="script-h2">② 頼清徳政権への圧力激化（2024〜）</div>
+<p class="script-p">2024年1月、台湾で頼清徳（ライ・チンドォー）氏が総統に当選。頼氏は台湾の主体性を強調する立場をとっており、中国はこれを「台湾独立勢力」と位置付けて軍事的圧力を強めています。2025年12月の大規模演習「正義使命-2025」はその象徴的な出来事です。</p>
+<div class="note-box">📌 グラフィック：中国軍機の台湾海峡中間線越え回数の推移（年別）を表示</div>
+
+<div class="script-h2">③ 「シリコンの盾」——半導体が抑止力になるか</div>
+<p class="script-p">TSMC創業者のモリス・チャン氏は「台湾の半導体を盾に戦争を防止すべき」と主張しています。世界の最先端半導体の生産がTSMCに集中しているため、もし中国が台湾を占領しても生産を継続できない——なぜなら製造に必要なASMLの露光装置、米国・日本・欧州の素材・化学薬品の供給が即座に止まるからです。これが「半導体は軍事的抑止力になる」という論理です。</p>
+</div>
+
+<div class="script-section">
+<div class="script-h1">第2部：軍事編</div>
+<!-- WAR:UPDATE:START -->
+<div style="background:rgba(184,58,58,0.08);border-left:3px solid #b83a3a;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
+  <div style="font-size:10px;color:var(--gold);letter-spacing:1.5px;margin-bottom:5px;font-family:'Oswald';">🆙 戦況マップ更新</div>
+  <div style="font-size:13px;font-weight:700;color:#FFD700;">2026年4月28日(火) 20:05現在の戦況図</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:3px;">詳細は「<a href="#" onclick="show('map');return false;" style="color:#e87c7c;text-decoration:none;">戦況マップ</a>」タブをご覧ください</div>
+</div>
+<!-- WAR:UPDATE:END -->
+
+<div class="script-h2">① 「正義使命-2025」——台湾包囲演習の実態</div>
+<p class="script-p">2025年12月29日、中国人民解放軍東部戦区は「正義使命-2025」と銘打った大規模演習を開始。複数方向から艦艇・航空機が台湾本島に接近し、海上封鎖を想定した動きも確認されました。130機の軍用機のうち90機が中間線を越え、専門家は「中国は台湾を包囲し外部からの支援を遮断する能力を示した」と指摘しています。</p>
+
+<div class="script-h2">② 中国軍の想定シナリオ</div>
+<p class="script-p">専門家が指摘する中国の台湾有事シナリオは主に3つです。①海上封鎖——台湾周辺の海上・航空交通を遮断して経済的に締め付ける、②電撃作戦——短期間での制圧を目指す上陸作戦、③ハイブリッド戦——サイバー攻撃・情報戦・経済圧力を組み合わせた「グレーゾーン」作戦。</p>
+<p class="script-p">米国の「戦略的曖昧性」が続く中、トランプ大統領は中国の演習について「まったく心配していない。彼らは20年間海軍演習を行ってきた」と述べ、台湾防衛に積極的でない姿勢を示しています。これが米中関係と台湾有事リスクをさらに複雑にしています。</p>
+<div class="note-box">📌 地図：三つのシナリオ（封鎖・電撃・ハイブリッド）の想定ルートを色分けで表示</div>
+
+<div class="script-h2">③ 日本・南西諸島への影響</div>
+<p class="script-p">台湾有事は日本にとって「対岸の火事」では絶対にありません。沖縄・先島諸島は台湾から目と鼻の先。有事になれば日本の領海・領空が紛争に巻き込まれる可能性があります。また、シーレーン（海上輸送路）が封鎖されれば、日本の原油・LNG・食料の輸入に深刻な影響が出ます。</p>
+</div>
+
+<div class="script-section">
+<div class="script-h1">第3部：軍事力比較</div>
+<div class="alert-box">🔫 詳細な軍事力比較は <strong>「軍事力比較」タブ</strong> をご覧ください。</div>
+<p class="script-p">中国人民解放軍（PLA）は過去30年で急速な近代化を遂げました。海軍の保有艦艇数はすでに米海軍を上回り、世界最大規模となっています。空軍はJ-20ステルス戦闘機を運用し、ミサイル部隊（ロケット軍）は台湾・沖縄・グアムをカバーする弾道ミサイルを保有しています。</p>
+<p class="script-p">一方、台湾軍は非対称戦略を採用。「ヤマアラシ戦略」と呼ばれる方針のもと、大型兵器より小型・機動性の高い兵器（対艦ミサイル・機雷・ドローン）を優先配備し、中国軍のコストを上げることを狙っています。</p>
+<p class="script-p">米国は「台湾関係法」に基づき台湾への武器売却を続け、有事には第7艦隊が介入する可能性があります。ただしトランプ政権下でその確実性に疑問符が付きます。</p>
+</div>
+
+<div class="script-section">
+<div class="script-h1">第4部：経済編</div>
+<!-- ECONOMY:UPDATE:START -->
+<div style="background:rgba(184,58,58,0.08);border-left:3px solid #b83a3a;border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0 16px;">
+  <div style="font-size:10px;color:var(--gold);letter-spacing:1.5px;margin-bottom:5px;font-family:'Oswald';">🆙 最新情報（2026年4月28日(火)）</div>
+  <div style="font-size:13px;font-weight:700;color:#FFD700;"><a href="http://www3.nhk.or.jp/news/html/20260428/k10015109931000.html" target="_blank" rel="noopener" style="color:#e87c7c;text-decoration:none;border-bottom:1px solid rgba(232,124,124,0.3);">株価6万円割れについて更新</a></div>
+  <div style="font-size:12px;color:var(--gray);margin-top:3px;">日経平均が6万円を割る。日銀の追加利上げ観測で市場に圧力</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:4px;">詳細は「<a href="#" onclick="show('economy');return false;" style="color:#e87c7c;text-decoration:none;">経済影響</a>」タブをご覧ください</div>
+</div>
+<!-- ECONOMY:UPDATE:END -->
+<div class="alert-box">📈 詳細なグラフは <strong>「経済影響」タブ</strong> をご覧ください。</div>
+<p class="script-p">台湾有事が経済に与える影響は、過去のどの紛争とも比較にならない規模になると言われています。理由は「半導体」です。TSMCは世界の先端半導体（7nm以下）の約90%を製造しています。スマートフォン・PC・自動車・家電・医療機器・軍事システム——すべてに必要な部品がTSMCから来ています。</p>
+<p class="script-p">キヤノングローバル戦略研究所は「台湾有事の結果、世界的な半導体供給の途絶が起きる。最先端のものほどひどくなる。日米欧は代替工場を建設するだろうが、これには数年かかる」と試算しています。</p>
+<p class="script-p">日本政府はこのリスクに対応するため、TSMCの熊本工場誘致（第1工場：2024年稼働、第2工場：2027年予定）やラピダスによる次世代半導体国産化プロジェクトを推進しています。ただし先端品の国内補完には限界があり、台湾依存の構造リスクは依然として大きいと指摘されています。</p>
+</div>
+
+<div class="script-section">
+<div class="script-h1">🎬 クロージング</div>
+<p class="script-p">今日は台湾有事をめぐる状況を3つの視点からお伝えしました。①中国の軍事的圧力と包囲演習の実態、②中国・台湾・米国の軍事力バランス、③半導体を軸にした経済影響と日本の対応です。</p>
+<p class="script-p">「中国は2026年に戦争を始める意思を明言していない。しかし、すでに戦争の準備は整っている」——オーストラリアABCのこの評価が、現在の台湾海峡を端的に表しています。戦争は起きていない。しかし、確実にリスクは高まっています。</p>
+<p class="script-p">日本に必要なことは、防衛力強化だけではありません。半導体の国内生産基盤の整備、食料備蓄の強化、エネルギー安全保障——「平時からの備え」が問われています。今日のレポートがこの問題を考えるきっかけになれば幸いです。</p>
+</div>
+</div>
+</section>
+
+<!-- ════ TIMELINE ════ -->
+<section id="timeline">
+<div class="container">
+<div class="section-h"><span class="section-num">📅</span>主要タイムライン 1949–2026</div>
+<div class="section-sub">台湾海峡危機の歴史から2026年現在の緊張まで</div>
+<div class="timeline">
+
+  <div class="tl-item"><div class="tl-date">1949年</div><div class="tl-dot major"></div>
+  <div class="tl-content major"><div class="tl-ev">🇹🇼 中華民国、台湾へ撤退——現在の台湾海峡問題の始まり</div>
+  <div class="tl-desc">国共内戦で毛沢東率いる共産党が勝利。蒋介石の中華民国政府が台湾へ撤退。中国共産党が中華人民共和国を建国。「一つの中国」問題の原点。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">1954〜96年</div><div class="tl-dot red-dot"></div>
+  <div class="tl-content danger"><div class="tl-ev">⚔ 第1〜3次台湾海峡危機</div>
+  <div class="tl-desc">1954年・1958年の砲撃戦、1996年の台湾総統選への圧力として中国がミサイル発射演習。米国が空母2隻を派遣して牽制。「戦略的曖昧性」が機能した事例。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">2000年代〜</div><div class="tl-dot"></div>
+  <div class="tl-content"><div class="tl-ev">🚀 中国軍の急速な近代化</div>
+  <div class="tl-desc">GDP成長を背景に国防費が急拡大。空母「遼寧」就役（2012）、J-20ステルス戦闘機開発。海軍艦艇数が米海軍を超える規模に。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">2012年</div><div class="tl-dot major"></div>
+  <div class="tl-content major"><div class="tl-ev">🇨🇳 習近平体制発足——「台湾統一」を最重要課題に</div>
+  <div class="tl-desc">習近平氏が国家主席に就任。「中国の夢」「台湾統一は我々の世代の使命」と繰り返し表明。軍の指揮権を強化し対台湾圧力を段階的に強化。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">2022年<br>8月</div><div class="tl-dot red-dot"></div>
+  <div class="tl-content danger"><div class="tl-ev">💥 ペロシ訪台——中国が史上最大規模の演習</div>
+  <div class="tl-desc">米国のペロシ下院議長が台湾を訪問。中国が猛反発し台湾を包囲する大規模弾道ミサイル発射演習を実施。初めてミサイルが日本のEEZ内に着弾。日本に衝撃。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">2024年<br>1月</div><div class="tl-dot major"></div>
+  <div class="tl-content major"><div class="tl-ev">🗳 頼清徳氏、台湾総統選に当選</div>
+  <div class="tl-desc">民進党の頼清徳氏が総統に当選。中国は「台湾独立勢力」と位置付け軍事・経済・外交圧力を激化。台湾海峡の緊張が新たな局面へ。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">2024年<br>5月</div><div class="tl-dot red-dot"></div>
+  <div class="tl-content danger"><div class="tl-ev">⚔ 「連合利剣-2024B」——頼就任直後に包囲演習</div>
+  <div class="tl-desc">頼清徳総統の就任直後、中国軍が「連合利剣-2024B」演習を実施。台湾の海上・空中封鎖、重要目標への精密打撃を想定。国際社会が強く非難。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">2024年<br>11月</div><div class="tl-dot blue-dot"></div>
+  <div class="tl-content blue-ev"><div class="tl-ev">🇺🇸 トランプ大統領、再選——「戦略的曖昧性」に揺らぎ</div>
+  <div class="tl-desc">トランプ氏が大統領選で勝利。「台湾は防衛費をGDPの10%払うべき」など、台湾防衛への消極的な発言が続き台湾・日本に懸念が広がる。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">2025年<br>12月29日</div><div class="tl-dot major"></div>
+  <div class="tl-content major"><div class="tl-ev">🔴 「正義使命-2025」——台湾包囲・実弾演習</div>
+  <div class="tl-desc">中国軍が大規模演習を開始。軍用機130機のうち90機が中間線越え。艦艇が複数方向から台湾に接近し海上封鎖を想定した行動。豪ABCは「戦争の準備は整っている」と報道。</div></div></div>
+
+  <div class="tl-item"><div class="tl-date">2026年<br>4月23日</div><div class="tl-dot major"></div>
+  <div class="tl-content major"><div class="tl-ev">📍 現在——「静かなる有事」が進行中</div>
+  <div class="tl-desc">軍事衝突は起きていないが、中国の軍事圧力は構造的に継続。TSMCの熊本工場が稼働開始し日本の半導体リスク軽減が進む一方、台湾依存の根本的リスクは残存。</div></div></div>
+
+<!-- TIMELINE:INSERT -->
+<div class="tl-item"><div class="tl-date">04月<br>28日</div><div class="tl-dot"></div><div class="tl-content"><div class="tl-ev">🕊️ NPT再検討会議開幕</div><div class="tl-desc">米国とイランが非難の応酬。核不拡散条約の再検討会議が冒頭から対立</div></div></div>
+<div class="tl-item"><div class="tl-date">04月<br>28日</div><div class="tl-dot"></div><div class="tl-content"><div class="tl-ev">🕊️ NPT再検討会議開幕</div><div class="tl-desc">米イラン対立で冒頭から非難応酬。核不拡散条約の重要な国際協議</div></div></div>
+<div class="tl-item"><div class="tl-date">04月<br>28日</div><div class="tl-dot"></div><div class="tl-content"><div class="tl-ev">🕊️ NPT再検討会議開始</div><div class="tl-desc">米国とイランが冒頭から激しく非難し合う。核軍縮交渉が難航</div></div></div>
+</div>
+</div>
+</section>
+
+<!-- ════ MAP ════ -->
+<section id="map">
+<div class="container">
+<div class="section-h"><span class="section-num">🗺</span>台湾海峡マップ：関係国と軍事配置</div>
+<div class="section-sub">台湾を取り囲む地政学的環境と主要軍事拠点</div>
+<!-- MAP:DATETIME -->
+<div style="display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:6px 14px;margin-bottom:14px;font-size:12px;">
+  <span style="color:var(--gold);font-family:'Oswald';letter-spacing:1px;">🕐 2026年4月28日(火) 20:05現在の戦況</span>
+  <span style="width:8px;height:8px;border-radius:50%;background:#e74c3c;animation:blink 1.2s ease-in-out infinite;display:inline-block;"></span>
+</div>
+<div style="display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:6px 14px;margin-bottom:14px;font-size:12px;">
+  <span style="color:var(--gold);font-family:'Oswald';letter-spacing:1px;">🕐 2026年4月28日(火) 12:18現在の戦況</span>
+  <span style="width:8px;height:8px;border-radius:50%;background:#e74c3c;animation:blink 1.2s ease-in-out infinite;display:inline-block;"></span>
+</div>
+<div style="display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:6px 14px;margin-bottom:14px;font-size:12px;">
+  <span style="color:var(--gold);font-family:'Oswald';letter-spacing:1px;">🕐 2026年4月28日(火) 07:35現在の戦況</span>
+  <span style="width:8px;height:8px;border-radius:50%;background:#e74c3c;animation:blink 1.2s ease-in-out infinite;display:inline-block;"></span>
+</div>
+<div style="display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:6px 14px;margin-bottom:14px;font-size:12px;">
+  <span style="color:var(--gold);font-family:'Oswald';letter-spacing:1px;">🕐 2026年4月28日(火) 07:33現在の戦況</span>
+  <span style="width:8px;height:8px;border-radius:50%;background:#e74c3c;animation:blink 1.2s ease-in-out infinite;display:inline-block;"></span>
+</div>
+<div style="display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:6px 14px;margin-bottom:14px;font-size:12px;">
+  <span style="color:var(--gold);font-family:'Oswald';letter-spacing:1px;">🕐 2026年4月28日(火) 07:29現在の戦況</span>
+  <span style="width:8px;height:8px;border-radius:50%;background:#e74c3c;animation:blink 1.2s ease-in-out infinite;display:inline-block;"></span>
+</div>
+<div class="kpi-grid" style="margin-bottom:20px;">
+  <div class="kpi-card"><div class="kpi-num">180<span class="kpi-unit">km</span></div><div class="kpi-desc">台湾海峡の最狭部の幅。日本の与那国島〜台湾は約110km</div></div>
+  <div class="kpi-card"><div class="kpi-num">90<span class="kpi-unit">%+</span></div><div class="kpi-desc">世界の最先端半導体（7nm以下）のTSMC依存度</div></div>
+  <div class="kpi-card"><div class="kpi-num">130<span class="kpi-unit">機</span></div><div class="kpi-desc">正義使命-2025で確認された中国軍用機数（うち90機が中間線越え）</div></div>
+</div>
+<div class="map-wrap" style="padding:16px;">
+  <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="max-height:420px;width:100%;">
+    <defs>
+      <marker id="ma" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <rect width="800" height="500" fill="#1a0d0d"/>
+
+    <!-- 中国本土 -->
+    <polygon points="30,30 500,30 500,300 400,320 300,310 200,280 100,250 30,200" fill="#2a1a1a" stroke="#8a3a3a" stroke-width="1.5"/>
+    <text x="200" y="160" fill="#cf6a6a" font-size="16" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP">中国 🇨🇳</text>
+    <text x="200" y="180" fill="#9a5a5a" font-size="10" text-anchor="middle" font-family="Noto Sans JP">人民解放軍（PLA）</text>
+
+    <!-- 台湾 -->
+    <polygon points="490,240 520,230 535,270 530,320 510,340 490,320 480,280" fill="#1a2a3a" stroke="#3a7fbf" stroke-width="2"/>
+    <text x="507" y="290" fill="#5b9bd5" font-size="12" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP">🇹🇼</text>
+    <text x="507" y="305" fill="#5b9bd5" font-size="10" text-anchor="middle" font-family="Noto Sans JP">台湾</text>
+
+    <!-- TSMC工場アイコン -->
+    <rect x="492" y="255" width="10" height="10" rx="2" fill="#ffd700" stroke="#c9a84c" stroke-width="1"/>
+    <text x="507" y="255" fill="#ffd700" font-size="8" text-anchor="middle" font-family="Noto Sans JP">💻TSMC</text>
+
+    <!-- 台湾海峡 中間線 -->
+    <line x1="430" y1="200" x2="450" y2="380" stroke="#888" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <text x="415" y="280" fill="#888" font-size="9" text-anchor="middle" font-family="Noto Sans JP" transform="rotate(-5,415,280)">中間線</text>
+
+    <!-- 台湾海峡 -->
+    <text x="460" y="230" fill="#3a6fa8" font-size="11" text-anchor="middle" font-style="italic" font-family="Noto Sans JP">台湾海峡</text>
+
+    <!-- 日本・南西諸島 -->
+    <polygon points="580,180 620,170 640,200 630,230 610,240 590,220" fill="#1a1a2a" stroke="#5a5a8a" stroke-width="1"/>
+    <text x="610" y="210" fill="#8a8abf" font-size="10" text-anchor="middle" font-family="Noto Sans JP">沖縄🇯🇵</text>
+    <!-- 与那国島 -->
+    <circle cx="552" cy="310" r="5" fill="#3a5a3a" stroke="#6a9a6a" stroke-width="1.5"/>
+    <text x="552" y="325" fill="#6a9a6a" font-size="8" text-anchor="middle" font-family="Noto Sans JP">与那国島</text>
+    <text x="552" y="335" fill="#6a9a6a" font-size="7" text-anchor="middle" font-family="Noto Sans JP">（台湾まで110km）</text>
+
+    <!-- フィリピン -->
+    <polygon points="530,380 570,370 580,410 560,440 530,430 520,400" fill="#1a1a1a" stroke="#5a5a5a" stroke-width="1"/>
+    <text x="550" y="410" fill="#888" font-size="9" text-anchor="middle" font-family="Noto Sans JP">フィリピン</text>
+
+    <!-- 東シナ海 -->
+    <text x="600" y="160" fill="#3a6fa8" font-size="10" text-anchor="middle" font-style="italic" font-family="Noto Sans JP">東シナ海</text>
+
+    <!-- 南シナ海 -->
+    <text x="430" y="440" fill="#3a6fa8" font-size="10" text-anchor="middle" font-style="italic" font-family="Noto Sans JP">南シナ海</text>
+
+    <!-- 中国の演習（包囲ルート） -->
+    <path d="M400,260 Q430,210 490,235" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#ma)"/>
+    <path d="M420,290 Q450,280 482,280" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#ma)"/>
+    <path d="M400,310 Q430,330 487,325" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#ma)"/>
+    <text x="360" y="240" fill="#e74c3c" font-size="9" text-anchor="middle" font-family="Noto Sans JP">🔴 中国軍包囲演習</text>
+
+    <!-- 米空母（介入シナリオ） -->
+    <text x="700" y="200" fill="#3a7fbf" font-size="10" text-anchor="middle" font-family="Noto Sans JP">🚢 米空母</text>
+    <text x="700" y="213" fill="#3a7fbf" font-size="8" text-anchor="middle" font-family="Noto Sans JP">（介入シナリオ）</text>
+    <path d="M680,225 Q630,240 570,260" fill="none" stroke="#3a7fbf" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#ma)"/>
+
+    <!-- 中国ミサイル射程 -->
+    <ellipse cx="300" cy="270" rx="280" ry="180" fill="none" stroke="rgba(184,58,58,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+    <text x="100" y="430" fill="rgba(184,58,58,0.6)" font-size="8" font-family="Noto Sans JP">東風ミサイル射程圏</text>
+
+    <!-- 熊本（TSMC） -->
+    <circle cx="660" cy="135" r="6" fill="#c9a84c" stroke="#ffd700" stroke-width="1.5"/>
+    <text x="660" y="122" fill="#ffd700" font-size="8" text-anchor="middle" font-family="Noto Sans JP">熊本💻</text>
+    <text x="660" y="112" fill="#ffd700" font-size="7" text-anchor="middle" font-family="Noto Sans JP">TSMC工場</text>
+
+    <!-- 凡例 -->
+    <rect x="600" y="340" width="185" height="135" rx="8" fill="rgba(26,13,13,0.95)" stroke="#8a3a3a" stroke-width="1"/>
+    <text x="613" y="360" fill="#c9a84c" font-size="10" font-weight="bold" font-family="Noto Sans JP">凡例</text>
+    <line x1="613" y1="370" x2="633" y2="370" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="639" y="374" fill="#ccc" font-size="9" font-family="Noto Sans JP">中国軍包囲演習</text>
+    <line x1="613" y1="386" x2="633" y2="386" stroke="#3a7fbf" stroke-width="1.5" stroke-dasharray="6,3"/>
+    <text x="639" y="390" fill="#ccc" font-size="9" font-family="Noto Sans JP">米空母介入シナリオ</text>
+    <line x1="613" y1="402" x2="633" y2="402" stroke="#888" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <text x="639" y="406" fill="#ccc" font-size="9" font-family="Noto Sans JP">台湾海峡中間線</text>
+    <circle cx="620" cy="418" r="4" fill="#ffd700" stroke="#c9a84c" stroke-width="1"/>
+    <text x="639" y="422" fill="#ffd700" font-size="9" font-family="Noto Sans JP">TSMCの工場</text>
+    <ellipse cx="620" cy="436" rx="8" ry="5" fill="none" stroke="rgba(184,58,58,0.5)" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="639" y="439" fill="rgba(184,58,58,0.8)" font-size="9" font-family="Noto Sans JP">ミサイル射程圏</text>
+    <text x="613" y="466" fill="#888" font-size="8" font-family="Noto Sans JP">※模式図（縮尺省略）</text>
+  </svg>
+</div>
+<div class="map-legend">
+  <div class="map-leg-item"><div class="m-dot" style="background:#cf6a6a;"></div><div><div style="font-size:12px;font-weight:700;">🇨🇳 中国（PLA）</div><div style="font-size:10px;color:var(--gray);">急速近代化。台湾包囲能力を演習で誇示</div></div></div>
+  <div class="map-leg-item"><div class="m-dot" style="background:#5b9bd5;"></div><div><div style="font-size:12px;font-weight:700;">🇹🇼 台湾</div><div style="font-size:10px;color:var(--gray);">「ヤマアラシ戦略」で非対称防衛。TSMCが世界の命運を握る</div></div></div>
+  <div class="map-leg-item"><div class="m-dot" style="background:#3a7fbf;"></div><div><div style="font-size:12px;font-weight:700;">🇺🇸 アメリカ</div><div style="font-size:10px;color:var(--gray);">「戦略的曖昧性」。トランプ政権下で介入意思が不透明に</div></div></div>
+  <div class="map-leg-item"><div class="m-dot" style="background:#6a9a6a;"></div><div><div style="font-size:12px;font-weight:700;">🇯🇵 日本</div><div style="font-size:10px;color:var(--gray);">与那国島〜台湾110km。シーレーン・半導体に直接影響</div></div></div>
+  <div class="map-leg-item"><div class="m-dot" style="background:#ffd700;"></div><div><div style="font-size:12px;font-weight:700;">💻 TSMC熊本工場</div><div style="font-size:10px;color:var(--gray);">2024年稼働開始。日本の半導体リスク軽減の切り札</div></div></div>
+  <div class="map-leg-item"><div class="m-dot" style="background:rgba(184,58,58,0.6);"></div><div><div style="font-size:12px;font-weight:700;">🚀 東風ミサイル射程</div><div style="font-size:10px;color:var(--gray);">台湾・沖縄・グアムをカバー。DF-21D「空母キラー」も保有</div></div></div>
+</div>
+<!-- MAP:REPORT:START -->
+<!-- MAP:REPORT:END -->
+</div>
+</section>
+
+<!-- ════ WEAPONS（軍事力比較） ════ -->
+<section id="weapons">
+<div class="container">
+<div class="section-h"><span class="section-num">🔫</span>軍事力比較：中国・台湾・米国</div>
+<div class="section-sub">台湾有事のカギを握る主要軍事力と装備を解説</div>
+<!-- WEAPONS:SOURCES -->
+<div class="info-box">💡 核心：中国の「A2/AD（接近阻止・領域拒否）」戦略——米軍が台湾に近づけないようにミサイル・潜水艦・電子戦で包囲する構造的なパワーシフトが進んでいる。</div>
+<div class="weapon-grid">
+<!-- WEAPONS:INSERT -->
+<div class="weapon-card">
+  <div class="weapon-head"><div class="weapon-icon" style="background:rgba(184,58,58,0.2);">🚀</div><div>
+    <div class="weapon-name">東風シリーズ（DF）弾道ミサイル</div>
+    <div class="weapon-type">中国人民解放軍ロケット軍</div>
+  </div></div>
+  <span class="weapon-tag" style="background:rgba(184,58,58,0.2);color:#e87c7c;">A2/ADの核心</span>
+  <div class="spec-row"><span class="spec-label">DF-21D</span><span class="spec-val">「空母キラー」。移動目標（空母）を攻撃可能な弾道ミサイル、射程1500km+</span></div>
+  <div class="spec-row"><span class="spec-label">DF-26</span><span class="spec-val">射程4000km。グアムの米軍基地をカバー「グアムキラー」</span></div>
+  <div class="spec-row"><span class="spec-label">DF-41</span><span class="spec-val">射程1万2000km以上の大陸間弾道ミサイル（ICBM）</span></div>
+  <div class="spec-row"><span class="spec-label">保有数</span><span class="spec-val">短・中距離弾道ミサイルのみで1000発以上（推計）</span></div>
+  <div class="spec-row"><span class="spec-label">意義</span><span class="spec-val">米空母が台湾近海に接近することを困難にする「非対称の切り札」</span></div>
+</div>
+
+<div class="weapon-card">
+  <div class="weapon-head"><div class="weapon-icon" style="background:rgba(184,58,58,0.2);">✈</div><div>
+    <div class="weapon-name">J-20「殲-20」ステルス戦闘機</div>
+    <div class="weapon-type">中国空軍・第5世代ステルス戦闘機</div>
+  </div></div>
+  <span class="weapon-tag" style="background:rgba(184,58,58,0.2);color:#e87c7c;">中国初のステルス機</span>
+  <div class="spec-row"><span class="spec-label">世代</span><span class="spec-val">第5世代（米F-22・F-35に相当）</span></div>
+  <div class="spec-row"><span class="spec-label">最高速度</span><span class="spec-val">マッハ2.0以上</span></div>
+  <div class="spec-row"><span class="spec-label">ステルス性</span><span class="spec-val">前方ステルス性は高いが後方・側面は改善余地あり（専門家評価）</span></div>
+  <div class="spec-row"><span class="spec-label">保有数</span><span class="spec-val">200機以上（2026年推計）</span></div>
+  <div class="spec-row"><span class="spec-label">課題</span><span class="spec-val">エンジン（WS-15）の信頼性・パイロット訓練の実戦経験不足</span></div>
+</div>
+
+<div class="weapon-card">
+  <div class="weapon-head"><div class="weapon-icon" style="background:rgba(58,127,191,0.2);">🚢</div><div>
+    <div class="weapon-name">台湾の「ヤマアラシ戦略」</div>
+    <div class="weapon-type">非対称防衛・対艦ミサイル・機雷</div>
+  </div></div>
+  <span class="weapon-tag" style="background:rgba(58,127,191,0.2);color:#5b9bd5;">台湾の切り札</span>
+  <div class="spec-row"><span class="spec-label">戦略概念</span><span class="spec-val">「ヤマアラシ」のように刺さる——上陸コストを最大化して抑止</span></div>
+  <div class="spec-row"><span class="spec-label">雄風-3</span><span class="spec-val">台湾国産超音速対艦ミサイル。射程400km。中国艦艇への主力兵器</span></div>
+  <div class="spec-row"><span class="spec-label">海機雷</span><span class="spec-val">台湾海峡・港湾への機雷敷設で上陸部隊を阻止</span></div>
+  <div class="spec-row"><span class="spec-label">無人機</span><span class="spec-val">ウクライナ戦争の教訓を取り入れたドローン部隊を整備中</span></div>
+  <div class="spec-row"><span class="spec-label">課題</span><span class="spec-val">徴兵制維持も兵力・士気・実戦経験の不足が課題</span></div>
+</div>
+
+<div class="weapon-card">
+  <div class="weapon-head"><div class="weapon-icon" style="background:rgba(58,127,191,0.2);">🚢</div><div>
+    <div class="weapon-name">米第7艦隊・空母打撃群</div>
+    <div class="weapon-type">米海軍・インド太平洋担当</div>
+  </div></div>
+  <span class="weapon-tag" style="background:rgba(58,127,191,0.2);color:#5b9bd5;">最大の抑止力</span>
+  <div class="spec-row"><span class="spec-label">空母</span><span class="spec-val">ニミッツ級・フォード級原子力空母。1隻で約90機の艦載機を搭載</span></div>
+  <div class="spec-row"><span class="spec-label">トマホーク</span><span class="spec-val">巡航ミサイルを搭載した駆逐艦・巡洋艦群が護衛</span></div>
+  <div class="spec-row"><span class="spec-label">問題</span><span class="spec-val">中国の「DF-21D空母キラー」により、台湾近海への接近が困難に</span></div>
+  <div class="spec-row"><span class="spec-label">不確実性</span><span class="spec-val">トランプ政権下で「介入するか否か」への疑問符が増大</span></div>
+  <div class="spec-row"><span class="spec-label">AUKUS</span><span class="spec-val">米英豪の安全保障協力でオーストラリアに原潜供与を計画</span></div>
+</div>
+
+<div class="weapon-card">
+  <div class="weapon-head"><div class="weapon-icon" style="background:rgba(201,168,76,0.2);">🛡</div><div>
+    <div class="weapon-name">日本の防衛体制（南西諸島）</div>
+    <div class="weapon-type">陸上自衛隊・海上自衛隊・航空自衛隊</div>
+  </div></div>
+  <span class="weapon-tag" style="background:rgba(201,168,76,0.2);color:#c9a84c;">日本の備え</span>
+  <div class="spec-row"><span class="spec-label">反撃能力</span><span class="spec-val">長距離スタンドオフミサイル（トマホーク等）を導入決定</span></div>
+  <div class="spec-row"><span class="spec-label">先島諸島</span><span class="spec-val">宮古島・石垣島などに陸自ミサイル部隊を展開済み</span></div>
+  <div class="spec-row"><span class="spec-label">防衛費</span><span class="spec-val">GDP比2%目標（2027年度）。5年間で43兆円規模に増額</span></div>
+  <div class="spec-row"><span class="spec-label">ドローン</span><span class="spec-val">2026年度に無人アセット調達費2773億円を計上</span></div>
+  <div class="spec-row"><span class="spec-label">課題</span><span class="spec-val">継戦能力（弾薬備蓄）・エネルギー備蓄・民間防衛インフラの整備が急務</span></div>
+</div>
+
+<div class="weapon-card">
+  <div class="weapon-head"><div class="weapon-icon" style="background:rgba(184,58,58,0.2);">🌐</div><div>
+    <div class="weapon-name">中国のサイバー・認知戦</div>
+    <div class="weapon-type">グレーゾーン作戦・ハイブリッド戦</div>
+  </div></div>
+  <span class="weapon-tag" style="background:rgba(184,58,58,0.15);color:#e87c7c;">「静かなる有事」</span>
+  <div class="spec-row"><span class="spec-label">サイバー攻撃</span><span class="spec-val">台湾の政府・インフラ・金融システムへの常態的なサイバー攻撃</span></div>
+  <div class="spec-row"><span class="spec-label">情報工作</span><span class="spec-val">SNS・AIを使ったフェイクニュース拡散で台湾社会の分断を図る</span></div>
+  <div class="spec-row"><span class="spec-label">経済圧力</span><span class="spec-val">台湾産品への輸入規制・中国人観光客制限などで経済的圧迫</span></div>
+  <div class="spec-row"><span class="spec-label">半導体人材</span><span class="spec-val">中国企業によるTSMC技術者の高額引き抜き工作が常態化</span></div>
+  <div class="spec-row"><span class="spec-label">意義</span><span class="spec-val">「軍事衝突なき支配」を目指すグレーゾーン戦略の核心</span></div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ════ ECONOMY ════ -->
+<section id="economy">
+<div class="container">
+<div class="section-h"><span class="section-num">📈</span>経済影響分析：半導体と日本経済</div>
+<div class="section-sub">台湾有事が世界・日本に与える経済的衝撃のシミュレーション</div>
+
+<div class="kpi-grid">
+  <div class="kpi-card"><div class="kpi-num">90<span class="kpi-unit">%+</span></div><div class="kpi-desc">世界の最先端半導体（7nm以下）のTSMC製造比率</div></div>
+  <div class="kpi-card"><div class="kpi-num">1.2<span class="kpi-unit">兆ドル</span></div><div class="kpi-desc">有事の場合の世界GDPへの年間損失（試算）</div></div>
+  <div class="kpi-card"><div class="kpi-num">2年<span class="kpi-unit">以上</span></div><div class="kpi-desc">代替供給体制が整うまでの最短期間（楽観シナリオ）</div></div>
+  <div class="kpi-card"><div class="kpi-num">1.2<span class="kpi-unit">兆円</span></div><div class="kpi-desc">日本政府のTSMC熊本工場への補助金総額（第1・2工場）</div></div>
+</div>
+
+<div class="grid-2" style="margin:20px 0;">
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;">
+  <div style="font-family:'Noto Serif JP';font-size:15px;font-weight:700;margin-bottom:16px;">💻 半導体サプライチェーンの脆弱性</div>
+  <div class="price-track">
+    <div class="price-row"><div class="price-date">現在</div><div class="price-dot-wrap"><div class="p-dot" style="background:#6abf6a;"></div></div><div class="price-content"><div class="price-bar" style="width:185px;background:rgba(58,138,58,0.3);"><span class="p-bar-val" style="color:#6abf6a;">TSMC供給：正常</span></div></div></div>
+    <div class="price-row"><div class="price-date">封鎖開始</div><div class="price-dot-wrap"><div class="p-dot" style="background:#e67e22;"></div></div><div class="price-content"><div class="price-bar" style="width:165px;background:rgba(230,126,34,0.3);"><span class="p-bar-val" style="color:#e67e22;">製造材料の供給停止</span></div><span class="price-note">即日影響</span></div></div>
+    <div class="price-row"><div class="price-date">数週間後</div><div class="price-dot-wrap"><div class="p-dot" style="background:#e74c3c;"></div></div><div class="price-content"><div class="price-bar" style="width:175px;background:rgba(231,76,60,0.4);"><span class="p-bar-val" style="color:#ff6b6b;">TSMC生産ライン停止🔺</span></div></div></div>
+    <div class="price-row"><div class="price-date">数ヶ月後</div><div class="price-dot-wrap"><div class="p-dot" style="background:#c0392b;"></div></div><div class="price-content"><div class="price-bar" style="width:190px;background:rgba(192,57,43,0.4);"><span class="p-bar-val" style="color:#ff6b6b;">世界の半導体不足が深刻化</span></div></div></div>
+    <div class="price-row"><div class="price-date">数年後</div><div class="price-dot-wrap"><div class="p-dot" style="background:#f39c12;"></div></div><div class="price-content"><div class="price-bar" style="width:145px;background:rgba(243,156,18,0.3);"><span class="p-bar-val" style="color:#f39c12;">代替工場が稼働開始</span></div><span class="price-note">楽観シナリオ</span></div></div>
+  </div>
+  <div style="margin-top:12px;padding:10px;background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.3);border-radius:6px;font-size:11px;color:#e8b4ae;">
+    コロナ禍の半導体不足（2021年）は世界の自動車生産を約770万台減少させた。台湾有事はその数十倍の影響をもたらすとされる。
+  </div>
+</div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;">
+  <div style="font-family:'Noto Serif JP';font-size:15px;font-weight:700;margin-bottom:16px;">🇯🇵 日本の半導体リスク軽減策</div>
+  <div class="price-track">
+    <div class="price-row"><div class="price-date">2024年</div><div class="price-dot-wrap"><div class="p-dot" style="background:#6abf6a;"></div></div><div class="price-content"><div class="price-bar" style="width:170px;background:rgba(58,138,58,0.3);"><span class="p-bar-val" style="color:#6abf6a;">TSMC熊本第1工場稼働</span></div></div></div>
+    <div class="price-row"><div class="price-date">2027年</div><div class="price-dot-wrap"><div class="p-dot" style="background:#f39c12;"></div></div><div class="price-content"><div class="price-bar" style="width:165px;background:rgba(243,156,18,0.3);"><span class="p-bar-val" style="color:#f39c12;">TSMC熊本第2工場予定</span></div></div></div>
+    <div class="price-row"><div class="price-date">2027年</div><div class="price-dot-wrap"><div class="p-dot" style="background:#5b9bd5;"></div></div><div class="price-content"><div class="price-bar" style="width:160px;background:rgba(46,117,182,0.3);"><span class="p-bar-val" style="color:#5b9bd5;">ラピダス量産目標</span></div><span class="price-note">2nm</span></div></div>
+    <div class="price-row"><div class="price-date">課題</span></div><div class="price-dot-wrap"><div class="p-dot" style="background:#e74c3c;"></div></div><div class="price-content"><div class="price-bar" style="width:175px;background:rgba(231,76,60,0.3);"><span class="p-bar-val" style="color:#e87c7c;">先端品の代替には限界</span></div></div></div>
+  </div>
+  <div style="margin-top:12px;padding:10px;background:rgba(58,127,191,0.08);border:1px solid rgba(58,127,191,0.3);border-radius:6px;font-size:11px;color:#aec8e8;">
+    日本政府のTSMC熊本への補助金：第1工場4760億円＋第2工場7320億円＝計約1.2兆円。半導体を「国家安全保障の要」と位置付けた戦略的投資。
+  </div>
+</div>
+</div>
+
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:4px;">
+  <div style="font-family:'Noto Serif JP';font-size:15px;font-weight:700;margin-bottom:16px;">🇯🇵 台湾有事が日本経済に与える影響（シミュレーション）</div>
+  <table class="impact-table" style="width:100%;">
+    <thead><tr><th>分野</th><th>具体的な影響</th></tr></thead>
+    <tbody>
+      <tr><td>半導体・電子部品</td><td>スマホ・PC・自動車・家電すべての生産が停止。2021年コロナ不足の数十倍規模の深刻な影響</td></tr>
+      <tr><td>自動車産業</td><td>半導体なしで車は作れない。日本の自動車輸出（年20兆円超）が壊滅的打撃</td></tr>
+      <tr><td>エネルギー</td><td>台湾海峡封鎖でタンカーのシーレーンが危機に。中東原油の輸送ルートが脅かされる</td></tr>
+      <tr><td>金融市場</td><td>円急騰・株式市場暴落・債券市場の混乱。日本の資産価値が大きく変動</td></tr>
+      <tr><td>中国ビジネス</td><td>日本企業の中国拠点・資産が接収リスク。日中貿易（年35兆円規模）が崩壊の恐れ</td></tr>
+      <tr><td>食料</td><td>シーレーン封鎖による食料輸入の停滞。日本の食料自給率38%では備蓄が不可欠</td></tr>
+      <tr><td>防衛コスト</td><td>GDP比2%（約10兆円/年）への防衛費倍増が必要。財政への重圧</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+</section>
+
+<!-- ════ THINKTANK ════ -->
+<section id="thinktank">
+<div class="container">
+<div class="section-h"><span class="section-num">🏛</span>シンクタンク・専門機関の分析</div>
+<div class="section-sub">防衛研究所・JIIA・JETRO・キヤノングローバル戦略研究所・笹川平和財団などの多角的評価</div>
+<!-- THINKTANK:INSERT -->
+<div class="tt-card">
+  <div class="tt-org"><a href="http://www3.nhk.or.jp/news/html/20260427/k10015108941000.html" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.4);">NHK国際 🔗</a></div>
+  <div class="tt-quote">米イラン紛争の終結交渉が膠着する中、イラン外相がロシア・パキスタン訪問で多角外交を展開。地域安定化への国際調停の重要性が高まり、核拡散防止条約再検討会議での米イラン対立も相まって、中東情勢の複雑化が進行している。</div>
+  <div class="tt-date" style="color:#FFD700;">🆙 2026年4月28日(火)｜自動収集</div>
+</div>
+<div class="tt-card">
+  <div class="tt-org"><a href="http://www3.nhk.or.jp/news/html/20260427/k10015108941000.html" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.4);">NHK国際 🔗</a></div>
+  <div class="tt-quote">米イラン紛争の長期化が懸念される中、イランがロシア・パキスタンとの外交を強化。多極化する中東外交の構図が鮮明化し、核軍縮や人道危機への国際的対応が複雑化している。</div>
+  <div class="tt-date" style="color:#FFD700;">🆙 2026年4月28日(火)｜自動収集</div>
+</div>
+<div class="tt-grid">
+  <div class="tt-card"><div class="tt-org">豪州ABC（オーストラリア国営放送）</div><div class="tt-quote">中国は2026年に戦争を始める意思を明言してはいない。しかし、世界に対して「すでに戦争の準備は整っている」という事実を示しているのである。専門家は「中国は台湾を包囲し、外部からの支援を遮断できる能力を示した」と指摘する。</div><div class="tt-date">2025年12月30日（正義使命-2025演習後）</div></div>
+  <div class="tt-card"><div class="tt-org">キヤノングローバル戦略研究所（CIGS）</div><div class="tt-quote">台湾有事の結果、世界的な半導体供給の途絶が起きる。これは最先端のものほどひどくなる。日米欧は別途工場を建設するだろうが、これには数年かかる。日本の製造業にとって、台湾有事の経済影響は膨大なものになる。中国が日米欧に持つ資産は凍結され、中国における日本の工場などは接収される。</div><div class="tt-date">2023年（現在も有効な分析）</div></div>
+  <div class="tt-card"><div class="tt-org">JETRO（日本貿易振興機構）</div><div class="tt-quote">台湾の半導体産業にとって中国は最大の輸出先（53.8%）。米国・同盟国の対中規制強化が中国の独自技術開発を加速させ、台湾企業の中国ビジネスに損失が生じる可能性がある。TSMCは熊本・米国・ドイツへの投資を並行して進め、リスク分散を図っている。</div><div class="tt-date">JETRO地域・分析レポート</div></div>
+  <div class="tt-card"><div class="tt-org">笹川平和財団（SPF）</div><div class="tt-quote">台湾海峡の平和と安定は日本の安全保障と直結している。海洋に囲まれた島国の日本にとって、台湾有事によるシーレーン危機は、エネルギー・食料・半導体すべての供給を脅かす。沖縄・先島諸島への影響も即時かつ深刻なものとなる。</div><div class="tt-date">継続的分析</div></div>
+  <div class="tt-card"><div class="tt-org">新米国安全保障センター（CNAS）マーティン・ラッサー氏</div><div class="tt-quote">米国が懸念しているのは「中国が台湾の半導体生産能力を中国のコントロール下に置くこと」だ。TSMCを掌握すれば、中国は世界の情報産業・軍事システムの供給を制御できる立場に立つ。これを防ぐことが米国の台湾政策の核心にある。</div><div class="tt-date">フォーサイト掲載</div></div>
+  <div class="tt-card"><div class="tt-org">経済産業研究所（RIETI）</div><span class="tt-quote">台湾有事が起きれば日本のシーレーンが危機にさらされ、エネルギー供給の途絶が危惧される。電力多消費型の現代戦は電力インフラへの攻撃を重視する。日本は食料備蓄、エネルギー備蓄、分散型電力システムの構築を平時から進めるべきだ。</div><div class="tt-date">RIETI特別報告</div></div>
+  <div class="tt-card"><div class="tt-org">地経学研究所（IOG）</div><div class="tt-quote">2026年には世界の最先端演算能力の9割以上が台湾に集中するという事実は、有事の際に世界経済が瞬時に停止することを意味する。TSMCを核とした半導体サプライチェーンの地政学的リスクは、日本企業が今すぐ対処すべき最重要課題のひとつだ。</div><div class="tt-date">2026年</div></div>
+  <div class="tt-card"><div class="tt-org">九州産業大学 朝元照雄名誉教授</div><div class="tt-quote">米中ハイテク対立の本質はAIを中核とし、演算・通信・先端半導体が勝敗を決する重要なカギ。米国は「Chip4+1」による半導体対中包囲網を構築中。日本は日・米・台・韓・蘭の連携で半導体産業の安全保障を確立すべき局面にある。</div><div class="tt-date">国際貿易投資研究所セミナー</div></div>
+</div>
+<div style="margin-top:24px;padding:16px 20px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);border-radius:10px;">
+  <div style="font-family:'Oswald';font-size:12px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;">📌 多角的分析のポイント</div>
+  <ul class="bullet-list">
+    <li>「静かなる有事」——軍事衝突なしに、サイバー攻撃・情報戦・経済圧力・技術者引き抜きで台湾を蚕食する「グレーゾーン戦略」がすでに進行中</li>
+    <li>「半導体の盾」——TSMCの稼働に必要な米・日・欧の素材・装置の供給を停止すれば中国も使えない。これが有事抑止力になる一方、脆弱性でもある</li>
+    <li>トランプ政権の不確実性——「戦略的曖昧性」への疑問符が増大し、中国が有事のリスク計算を変える可能性がある</li>
+    <li>日本への直接的影響——与那国島から台湾まで110km。シーレーン危機・半導体断絶・エネルギー停止が同時に起きるシナリオへの備えが急務</li>
+  </ul>
+</div>
+<div style="margin-top:14px;font-size:10px;color:var(--gray);line-height:1.8;">
+※ 本資料の情報は公開情報に基づいています。2026年4月22日時点。情勢は急変する可能性があります。<br>
+※ 情報源：防衛省防衛研究所 / JIIA / JETRO / キヤノングローバル戦略研究所 / RIETI / 笹川平和財団 / 地経学研究所 / 日本経済新聞 他
+</div>
+</div>
+</section>
+
+<script>
+function show(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const map={'script':0,'timeline':1,'map':2,'weapons':3,'economy':4,'thinktank':5};
+  document.querySelectorAll('.nav-btn')[map[id]].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+(function(){
+  function updateTime(){
+    const now=new Date();
+    const el=document.getElementById('nav-time');
+    if(!el)return;
+    el.textContent=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'})+' '+now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})+' 更新';
+  }
+  updateTime();
+  setInterval(updateTime,60000);
+})();
+</script>
+</body>
+</html>

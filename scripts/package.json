@@ -1,0 +1,19 @@
+{
+  "name": "taiwan-contingency-report",
+  "version": "1.0.0",
+  "description": "中国・台湾有事レポート 2026 - 自動更新システム",
+  "scripts": {
+    "fetch-news": "node fetch-taiwan-news.js",
+    "build-archive": "node build-archive.js",
+    "generate-note": "node post-to-note.js"
+  },
+  "keywords": [
+    "taiwan",
+    "china",
+    "geopolitics",
+    "semiconductor",
+    "TSMC"
+  ],
+  "author": "ナナ",
+  "license": "MIT"
+}

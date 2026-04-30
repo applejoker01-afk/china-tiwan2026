@@ -1,0 +1,73 @@
+const fs = require('fs');
+const https = require('https');
+
+// HTMLから本文を抽出してNote用のマークダウンに変換
+function generateNoteDraft() {
+    const html = fs.readFileSync('index.html', 'utf-8');
+    const pagesUrl = process.env.PAGES_URL || 'https://applejoker01-afk.github.io/china-tiwan2026';
+    const today = new Date().toISOString().split('T')[0];
+    
+    const noteDraft = `# 中国・台湾有事レポート 2026
+
+**最終更新: ${today}**
+
+## 📊 レポート概要
+
+2026年の中国・台湾情勢を多角的に分析。CSISウォーゲーム結果、最新鋭兵器解説、半導体サプライチェーンへの影響を詳細に報告。
+
+## 🔗 完全版レポート
+
+詳細な分析・データ・図表は以下のリンクから:
+
+**${pagesUrl}**
+
+## 📑 主要セクション
+
+### 📅 タイムライン
+2023年CSIS発表から2026年現在までの主要出来事
+
+### 🎯 CSISウォーゲーム
+24シナリオの台湾有事シミュレーション
+- 基本想定: 中国敗北も全当事国に甚大な損害
+- 米軍死者3,224人(3週間)
+- 自衛隊艦船26隻喪失
+- 中国軍艦艇138隻喪失
+
+### 🚀 主要兵器
+**中国側:**
+- DF-21D「空母キラー」
+- DF-26B「グアムキラー」
+- 055型駆逐艦
+- J-20ステルス戦闘機
+
+**台湾・米軍側:**
+- F-16V Block 70/72 (207機体制)
+- HIMARS 11基
+- ハープーン沿岸防衛システム
+- パトリオットPAC-3
+
+### 💹 経済的影響
+- TSMC世界シェア60-62%
+- 台湾有事で世界的半導体欠乏
+- 日本の集積回路輸入60%超が台湾依存
+- TSMC熊本工場で対策も根本的リスクは継続
+
+## 📝 結論
+
+「台湾有事は日本有事」
+日本が在日米軍基地使用を認めなければ台湾防衛は失敗。
+抑止力の維持が最優先。
+
+---
+
+📚 詳細な分析・データ・兵器スペック・タイムラインは完全版レポートをご覧ください:
+${pagesUrl}
+
+#台湾有事 #TSMC #半導体 #CSIS #地政学 #安全保障
+`;
+    
+    fs.writeFileSync('note-draft.txt', noteDraft);
+    console.log('Note下書きを生成しました');
+}
+
+generateNoteDraft();
