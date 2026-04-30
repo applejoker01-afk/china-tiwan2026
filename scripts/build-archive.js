@@ -1,61 +1,101 @@
-import fs from 'fs';
+const fs = require('fs');
+const path = require('path');
 
-const archiveDir = 'archive';
-const outputFile = 'archive/index.html';
-
-const files = fs.readdirSync(archiveDir)
-  .filter(f => f.match(/^\d{4}-\d{2}-\d{2}\.html$/))
-  .sort()
-  .reverse();
-
-const listItems = files.map(f => {
-  const date = f.replace('.html', '');
-  const [year, month, day] = date.split('-');
-  const label = `${year}年${month}月${day}日版`;
-  return `
-    <li>
-      <a href="${f}">
-        <span class="date">${label}</span>
-        <span class="arrow">→</span>
-      </a>
-    </li>`;
-}).join('');
-
-const html = `<!DOCTYPE html>
+// アーカイブ一覧ページを生成
+function buildArchiveIndex() {
+    const archiveDir = './archive';
+    
+    if (!fs.existsSync(archiveDir)) {
+        fs.mkdirSync(archiveDir, { recursive: true });
+    }
+    
+    // アーカイブファイル一覧を取得
+    const files = fs.readdirSync(archiveDir)
+        .filter(f => f.endsWith('.html') && f !== 'index.html')
+        .sort()
+        .reverse();
+    
+    const html = `<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ウクライナ戦争レポート 過去のレポート一覧</title>
-<style>
-  body{background:#0d1a0d;color:#f0f4f0;font-family:'Noto Sans JP',sans-serif;margin:0;padding:0;}
-  .header{background:rgba(13,26,13,0.97);border-bottom:1px solid rgba(58,138,58,0.3);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;}
-  .logo{font-family:Oswald,sans-serif;font-size:18px;color:#c9a84c;letter-spacing:2px;}
-  .back{color:#6abf6a;text-decoration:none;font-size:13px;}
-  .back:hover{text-decoration:underline;}
-  .container{max-width:720px;margin:48px auto;padding:0 24px;}
-  h1{font-size:24px;font-weight:700;margin-bottom:8px;}
-  .sub{color:#8899aa;font-size:13px;margin-bottom:32px;}
-  ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;}
-  li a{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.03);border:1px solid rgba(58,138,58,0.3);border-radius:8px;padding:16px 20px;text-decoration:none;color:#f0f4f0;transition:all .2s;}
-  li a:hover{border-color:#3a8a3a;background:rgba(58,138,58,0.08);}
-  .date{font-size:15px;font-weight:700;}
-  .arrow{color:#6abf6a;font-size:18px;}
-  .empty{color:#8899aa;font-size:14px;text-align:center;margin-top:48px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国・台湾有事レポート アーカイブ</title>
+    <style>
+        body {
+            font-family: 'Yu Gothic', sans-serif;
+            background: #0a0e27;
+            color: #e8eaf6;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ffa726;
+            border-bottom: 3px solid #ffa726;
+            padding-bottom: 1rem;
+        }
+        .archive-list {
+            list-style: none;
+            padding: 0;
+        }
+        .archive-item {
+            background: #1a1f3a;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #1a5490;
+        }
+        .archive-item:hover {
+            border-left-color: #ffa726;
+            background: #2a2f4a;
+        }
+        .archive-link {
+            color: #90caf9;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .archive-link:hover {
+            color: #ffa726;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: #1a5490;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .back-link:hover {
+            background: #ffa726;
+        }
+    </style>
 </head>
 <body>
-<div class="header">
-  <div class="logo">🇺🇦 ウクライナ戦争レポート｜過去のレポート</div>
-  <a href="../index.html" class="back">← 最新版を見る</a>
-</div>
-<div class="container">
-  <h1>📚 過去のレポート一覧</h1>
-  <p class="sub">更新日ごとのアーカイブです。タイトルをクリックするとその日のレポートが開きます。</p>
-  ${files.length > 0 ? `<ul>${listItems}</ul>` : `<p class="empty">アーカイブはまだありません。</p>`}
-</div>
+    <h1>📚 中国・台湾有事レポート アーカイブ</h1>
+    <p>過去に公開されたレポートの一覧です。日付をクリックして各バージョンを確認できます。</p>
+    
+    <ul class="archive-list">
+${files.map(f => {
+    const date = f.replace('.html', '');
+    return `        <li class="archive-item">
+            <a href="${f}" class="archive-link">📅 ${date}</a>
+        </li>`;
+}).join('\n')}
+    </ul>
+    
+    <a href="../index.html" class="back-link">← 最新版に戻る</a>
+    
+    <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
+        合計 ${files.length} 件のアーカイブ
+    </p>
 </body>
 </html>`;
+    
+    fs.writeFileSync(path.join(archiveDir, 'index.html'), html);
+    console.log(`アーカイブ一覧を生成しました (${files.length}件)`);
+}
 
-fs.writeFileSync(outputFile, html, 'utf8');
-console.log(`✅ archive/index.html を生成しました（${files.length}件）`);
+buildArchiveIndex();
